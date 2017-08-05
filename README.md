@@ -106,7 +106,7 @@ new Vue({
 
 ### Server-side rendering
 
-<details open><summary>The easy way, use emotion's [extractStatic](https://github.com/tkh44/emotion/blob/master/docs/extract-static.md) mode:</summary><br>
+<details open><summary>The easy way, use emotion's extractStatic mode:</summary><br>
 
 ```js
 // .babelrc
@@ -116,6 +116,8 @@ new Vue({
   ]
 }
 ```
+
+*Check out the doc about [extractStatic](https://github.com/tkh44/emotion/blob/master/docs/extract-static.md).*
 
 Then when you write something like:
 
