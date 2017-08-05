@@ -1,0 +1,58 @@
+{
+  "name": "emotion-vue",
+  "version": "0.0.0",
+  "description": "Seamlessly use emotion (CSS-in-JS) with Vue.js",
+  "repository": {
+    "url": "EGOIST/emotion-vue",
+    "type": "git"
+  },
+  "module": "dist/emotion-vue.es.js",
+  "main": "dist/emotion-vue.common.js",
+  "cdn": "dist/emotion-vue.min.js",
+  "unpkg": "dist/emotion-vue.min.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "npm run lint && echo 'no tests!'",
+    "lint": "xo",
+    "prepublish": "npm run build",
+    "build": "bili --format umd,cjs,es,umdCompress --module-name emotionVue --exports named",
+    "example": "poi",
+    "build:example": "poi build"
+  },
+  "author": "EGOIST <0x142857@gmail.com>",
+  "license": "MIT",
+  "poi": {
+    "entry": "example/index.js",
+    "dist": "example/dist",
+    "homepage": "/"
+  },
+  "babel": {
+    "presets": [
+      ["vue-app", {"useBuiltIns": true}]
+    ],
+    "plugins": [
+      "emotion/babel"
+    ]
+  },
+  "dependencies": {
+    "emotion": "^7.0.11"
+  },
+  "devDependencies": {
+    "bili": "^0.17.0",
+    "eslint-config-rem": "^3.0.0",
+    "poi": "^9.1.4",
+    "react": "^15.6.1",
+    "xo": "^0.18.0"
+  },
+  "xo": {
+    "extends": "rem/prettier",
+    "ignores": [
+      "example/**"
+    ],
+    "rules": {
+      "camelcase": 0
+    }
+  }
+}
