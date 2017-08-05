@@ -16,6 +16,7 @@ const Button = styled('button')`
   background-color: ${backgroundColor};
   border: 1px solid ${color};
   padding: 10px 20px;
+  font-size: ${props => props.fontSize};
 `
 
 const Controls = styled('div')`
@@ -31,7 +32,8 @@ const App = {
     return {
       theme: {
         mode: 'light'
-      }
+      },
+      fontSize: 16
     }
   },
 
@@ -44,6 +46,10 @@ const App = {
   methods: {
     updateMode(e) {
       this.theme.mode = e.target.value
+    },
+
+    updateFontSize(e) {
+      this.fontSize = e.target.value
     }
   },
 
@@ -51,6 +57,7 @@ const App = {
     return (
       <div>
         <Controls>
+          Theme:{' '}
           <select onChange={this.updateMode}>
             <option
               value="light"
@@ -63,8 +70,14 @@ const App = {
               Dark
             </option>
           </select>
+          {' '}Font Size:{' '}
+          <input
+            type="number"
+            value={this.fontSize}
+            onInput={this.updateFontSize}
+          />
         </Controls>
-        <Button class="foo">Button</Button>
+        <Button class="foo" fontSize={this.fontSize}>Button</Button>
       </div>
     )
   }
