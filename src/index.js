@@ -72,10 +72,6 @@ export default function(tag, cls, objs, vars = [], content) {
         push(finalObjs, content.apply(null, map(vars, getValue)))
       }
 
-      if (props.class) {
-        push(finalObjs, props.class.split(' '))
-      }
-
       const className = css(map(finalObjs, getValue))
 
       return h(

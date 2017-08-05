@@ -15,7 +15,7 @@ const App = {
   render() {
     return (
       <div>
-        <PinkButton>Pink Button</PinkButton>{' '}
+        <PinkButton class="foo">Pink Button</PinkButton>{' '}
         <PinkRoundButton>Pink Round Button</PinkRoundButton>
       </div>
     )
