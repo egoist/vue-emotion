@@ -28,6 +28,8 @@ export default function(tag, cls, objs, vars = [], content) {
 
     functional: true,
 
+    inject: ['theme'],
+
     render(h, ctx) {
       const { props } = ctx
 
