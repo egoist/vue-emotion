@@ -74,11 +74,9 @@ const Button = styled('button')`
 `
 
 new Vue({
-  data() {
-    return {
-      theme: {
-        mode: 'light'
-      }
+  data: {
+    theme: {
+      mode: 'light'
     }
   },
 
