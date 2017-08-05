@@ -2,6 +2,8 @@
 
 [![NPM version](https://img.shields.io/npm/v/emotion-vue.svg?style=flat)](https://npmjs.com/package/emotion-vue) [![NPM downloads](https://img.shields.io/npm/dm/emotion-vue.svg?style=flat)](https://npmjs.com/package/emotion-vue) [![CircleCI](https://circleci.com/gh/egoist/emotion-vue/tree/master.svg?style=shield)](https://circleci.com/gh/egoist/emotion-vue/tree/master)  [![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&style=flat)](https://github.com/egoist/donate)
 
+*[emotion](https://github.com/tkh44/emotion) is the Next Generation of CSS-in-JS.*
+
 ## Install
 
 ```bash
