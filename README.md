@@ -7,7 +7,7 @@
 ## Install
 
 ```bash
-yarn add emotion-vue
+yarn add emotion emotion-vue
 ```
 
 ## Usage
