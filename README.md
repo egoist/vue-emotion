@@ -143,8 +143,8 @@ Basically you can treat `.emotion.css` as normal CSS file and configure the load
 
 <details><summary>The alternative way</summary><br>
 
-Check out https://github.com/tkh44/emotion/blob/master/docs/ssr.md, it does **not** support streaming.
-<details>
+Check out https://github.com/tkh44/emotion/blob/master/docs/ssr.md, it does **not** support streaming though.
+</details>
 
 ## Contributing
 
