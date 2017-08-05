@@ -1,22 +1,70 @@
 import Vue from 'vue'
-import styled from '../src'
+import styled, { theme } from '../src'
 
-const PinkButton = styled('button')`
-  background-color: pink;
-  border: 1px solid pink;
+const color = theme('mode', {
+  light: 'black',
+  dark: 'white'
+})
+
+const backgroundColor = theme('mode', {
+  light: 'white',
+  dark: 'black'
+})
+
+const Button = styled('button')`
+  color: ${color};
+  background-color: ${backgroundColor};
+  border: 1px solid ${color};
   padding: 10px 20px;
 `
 
-const PinkRoundButton = styled(PinkButton)`
-  border-radius: 5px;
+const Controls = styled('div')`
+  background-color: #f0f0f0;
+  padding: 10px;
+  margin-bottom: 10px;
 `
 
 const App = {
+  name: 'app',
+
+  data() {
+    return {
+      theme: {
+        mode: 'light'
+      }
+    }
+  },
+
+  provide() {
+    return {
+      theme: this.theme
+    }
+  },
+
+  methods: {
+    updateMode(e) {
+      this.theme.mode = e.target.value
+    }
+  },
+
   render() {
     return (
       <div>
-        <PinkButton class="foo">Pink Button</PinkButton>{' '}
-        <PinkRoundButton>Pink Round Button</PinkRoundButton>
+        <Controls>
+          <select onChange={this.updateMode}>
+            <option
+              value="light"
+              selected={this.theme.mode === 'light'}>
+              Light
+            </option>
+            <option
+              value="dark"
+              selected={this.theme.mode === 'dark'}>
+              Dark
+            </option>
+          </select>
+        </Controls>
+        <Button class="foo">Button</Button>
       </div>
     )
   }

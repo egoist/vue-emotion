@@ -44,6 +44,7 @@
   "dependencies": {},
   "devDependencies": {
     "bili": "^0.17.0",
+    "emotion": "^7.0.11",
     "eslint-config-rem": "^3.0.0",
     "poi": "^9.1.4",
     "react": "^15.6.1",

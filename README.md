@@ -49,6 +49,51 @@ new Vue({
 
 Refer to https://github.com/tkh44/emotion for more docs.
 
+## Theming
+
+Basically it works like [styled-theming](https://github.com/thejameskyle/styled-theming):
+
+```js
+import styled, { theme } from 'emotion-vue'
+
+const color = theme('mode', {
+  light: 'black',
+  dark: 'white'
+})
+
+const backgroundColor = theme('mode', {
+  light: 'white',
+  dark: 'black'
+})
+
+const Button = styled('button')`
+  color: ${color};
+  background-color: ${backgroundColor};
+  border: 1px solid ${color};
+  padding: 10px 20px;
+`
+
+new Vue({
+  data() {
+    return {
+      theme: {
+        mode: 'light'
+      }
+    }
+  },
+
+  provide() {
+    return {
+      theme: this.theme
+    }
+  },
+
+  render() {
+    return <Button>hi</Button>
+  }
+})
+```
+
 ## Contributing
 
 1. Fork it!
