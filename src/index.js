@@ -1,15 +1,5 @@
-import { css } from 'emotion/lib/index'
-import { map, reduce, assign } from 'emotion/lib/utils'
-
-export {
-  flush,
-  css,
-  injectGlobal,
-  fontFace,
-  keyframes,
-  hydrate,
-  objStyle
-} from 'emotion/lib/index'
+import { css } from 'emotion'
+import { map, reduce, assign } from 'emotion-utils'
 
 export { default as theme } from './theme'
 

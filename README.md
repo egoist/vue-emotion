@@ -1,13 +1,13 @@
-# emotion-vue
+# vue-emotion
 
-[![NPM version](https://img.shields.io/npm/v/emotion-vue.svg?style=flat)](https://npmjs.com/package/emotion-vue) [![NPM downloads](https://img.shields.io/npm/dm/emotion-vue.svg?style=flat)](https://npmjs.com/package/emotion-vue) [![CircleCI](https://circleci.com/gh/egoist/emotion-vue/tree/master.svg?style=shield)](https://circleci.com/gh/egoist/emotion-vue/tree/master)  [![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&style=flat)](https://github.com/egoist/donate)
+[![NPM version](https://img.shields.io/npm/v/vue-emotion.svg?style=flat)](https://npmjs.com/package/vue-emotion) [![NPM downloads](https://img.shields.io/npm/dm/vue-emotion.svg?style=flat)](https://npmjs.com/package/vue-emotion) [![CircleCI](https://circleci.com/gh/egoist/vue-emotion/tree/master.svg?style=shield)](https://circleci.com/gh/egoist/vue-emotion/tree/master)  [![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&style=flat)](https://github.com/egoist/donate)
 
 *[emotion](https://github.com/tkh44/emotion) is the Next Generation of CSS-in-JS.*
 
 ## Install
 
 ```bash
-yarn add emotion emotion-vue
+yarn add emotion vue-emotion
 ```
 
 ## Table of Contents
@@ -37,7 +37,7 @@ Add the babel plugin first:
 Then create your styled component:
 
 ```js
-import styled from 'emotion-vue'
+import styled from 'vue-emotion'
 
 const Button = styled('button')`
   font-size: 15px;
@@ -66,7 +66,7 @@ Refer to https://github.com/tkh44/emotion for more docs.
 Basically it works like [styled-theming](https://github.com/thejameskyle/styled-theming):
 
 ```js
-import styled, { theme } from 'emotion-vue'
+import styled, { theme } from 'vue-emotion'
 
 const color = theme('mode', {
   light: 'black',
@@ -122,7 +122,7 @@ new Vue({
 Then when you write something like:
 
 ```js
-import styled from 'emotion-vue'
+import styled from 'vue-emotion'
 
 const H1 = styled('h1')`
   color: #ffd43b;
@@ -133,7 +133,7 @@ It will be compiled to:
 
 ```js
 import './h1.emotion.css'
-import styled from 'emotion-vue'
+import styled from 'vue-emotion'
 
 const H1 = styled('h1', 'css-duiy4a')
 ```
@@ -157,7 +157,7 @@ Check out https://github.com/tkh44/emotion/blob/master/docs/ssr.md, it does **no
 
 ## Author
 
-**emotion-vue** © [EGOIST](https://github.com/egoist), Released under the [MIT](./LICENSE) License.<br>
-Authored and maintained by EGOIST with help from contributors ([list](https://github.com/egoist/emotion-vue/contributors)).
+**vue-emotion** © [EGOIST](https://github.com/egoist), Released under the [MIT](./LICENSE) License.<br>
+Authored and maintained by EGOIST with help from contributors ([list](https://github.com/egoist/vue-emotion/contributors)).
 
 > [github.com/egoist](https://github.com/egoist) · GitHub [@EGOIST](https://github.com/egoist) · Twitter [@_egoistlily](https://twitter.com/_egoistlily)
