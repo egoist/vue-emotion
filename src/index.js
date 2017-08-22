@@ -1,8 +1,6 @@
 import { css } from 'emotion'
 import { map, reduce, assign } from 'emotion-utils'
 
-export { default as theme } from './theme'
-
 const push = (obj, items) => Array.prototype.push.apply(obj, items)
 
 // eslint-disable-next-line max-params
