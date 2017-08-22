@@ -15,7 +15,6 @@ yarn add emotion vue-emotion
 <!-- toc -->
 
 - [Usage](#usage)
-  * [Theming](#theming)
   * [Server-side rendering](#server-side-rendering)
 - [Contributing](#contributing)
 - [Author](#author)
