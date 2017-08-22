@@ -1,6 +1,6 @@
 {
   "name": "vue-emotion",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Seamlessly use emotion (CSS-in-JS) with Vue.js",
   "repository": {
     "url": "EGOIST/vue-emotion",
