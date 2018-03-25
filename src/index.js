@@ -47,7 +47,7 @@ export default (tag, options) => {
     }
 
     const Styled = {
-      name: 'Styled',
+      name: `Styled${tag.name || identifierName || 'Component'}`,
       functional: true,
       inject: {
         theme: {
