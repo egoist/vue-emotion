@@ -15,7 +15,6 @@ yarn add emotion vue-emotion
 <!-- toc -->
 
 - [Usage](#usage)
-  * [Server-side rendering](#server-side-rendering)
 - [Contributing](#contributing)
 - [Author](#author)
 
@@ -23,17 +22,8 @@ yarn add emotion vue-emotion
 
 ## Usage
 
-Add the babel plugin first:
 
-```json
-{
-  "plugins": [
-    "emotion/babel"
-  ]
-}
-```
-
-Then create your styled component:
+Create your styled component:
 
 ```js
 import styled from 'vue-emotion'
@@ -60,47 +50,6 @@ new Vue({
 
 Refer to https://github.com/tkh44/emotion for more docs.
 
-### Server-side rendering
-
-<details open><summary>The easy way, use emotion's extractStatic mode:</summary><br>
-
-```js
-// .babelrc
-{
-  "plugins": [
-    ["emotion/babel", { "extractStatic": true }]
-  ]
-}
-```
-
-*Check out the doc about [extractStatic](https://github.com/tkh44/emotion/blob/master/docs/extract-static.md).*
-
-Then when you write something like:
-
-```js
-import styled from 'vue-emotion'
-
-const H1 = styled('h1')`
-  color: #ffd43b;
-`
-```
-
-It will be compiled to:
-
-```js
-import './h1.emotion.css'
-import styled from 'vue-emotion'
-
-const H1 = styled('h1', 'css-duiy4a')
-```
-
-Basically you can treat `.emotion.css` as normal CSS file and configure the loader for it in webpack config, since we're trying to make SSR work, you will need `vue-style-loader` instead of `style-loader` for it.
-</details>
-
-<details><summary>The alternative way</summary><br>
-
-Check out https://github.com/tkh44/emotion/blob/master/docs/ssr.md, it does **not** support streaming though.
-</details>
 
 ## Contributing
 

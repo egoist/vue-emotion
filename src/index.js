@@ -1,89 +1,113 @@
-import { css } from 'emotion'
-import { map, reduce, assign } from 'emotion-utils'
+import { css, getRegisteredStyles } from 'emotion'
+import assign from 'nano-assign'
+import { STYLES_KEY } from 'emotion-utils'
 
-const push = (obj, items) => Array.prototype.push.apply(obj, items)
-
-// eslint-disable-next-line max-params
-export default function(tag, cls, objs, vars = [], content) {
-  if (!tag) {
-    throw new Error(
-      'You are trying to create a styled element with an undefined component.\nYou may have forgotten to import it.'
-    )
+function stringifyClass(klass) {
+  if (Array.isArray(klass)) {
+    return klass.join(' ')
   }
+  if (typeof klass === 'object') {
+    return Object.keys(klass).filter(key => Boolean(klass[key])).join(' ')
+  }
+  return klass
+}
 
-  const componentTag = tag.name || 'Component'
+export default (tag, options) => {
+  let staticClassName
+  let identifierName
+  let stableClassName
+  let propsDefinitions
+  if (options !== undefined) {
+    staticClassName = options.e
+    identifierName = options.label
+    stableClassName = options.target
+    propsDefinitions = options.props
+  }
+  const isReal = tag.__emotion_real === tag
+  const baseTag =
+    staticClassName === undefined ? (isReal && tag.__emotion_base) || tag : tag
 
-  const Styled = {
-    name: `styled-${componentTag}`,
+  return (...args) => {
+    let styles =
+      isReal && tag[STYLES_KEY] !== undefined ? tag[STYLES_KEY].slice(0) : []
+    if (identifierName !== undefined) {
+      styles.push(`label:${identifierName};`)
+    }
+    if (staticClassName === undefined) {
+      if (args[0] == null || args[0].raw === undefined) {
+        styles.push.apply(styles, args)
+      } else {
+        styles.push(args[0][0])
+        let len = args.length
+        let i = 1
+        for (; i < len; i++) {
+          styles.push(args[i], args[0][i])
+        }
+      }
+    }
 
-    functional: true,
-
-    render(h, ctx) {
-      const { props } = ctx
-
-      const getValue = v => {
-        if (v && typeof v === 'function') {
-          if (v.__emotion_class) {
-            return `& .${v.__emotion_class}`
+    const Styled = {
+      name: 'Styled',
+      functional: true,
+      inject: {
+        theme: {
+          default: null
+        }
+      },
+      props: propsDefinitions,
+      render(h, { data, children, props, injections }) {
+        let className = ''
+        let classInterpolations = []
+        const exisingClassName = stringifyClass(data.class)
+        const attrs = {}
+        for (const key in data.attrs) {
+          if (key[0] !== '$') {
+            attrs[key] = data.attrs[key]
           }
-          return v(props, ctx)
         }
 
-        return v
+        if (exisingClassName) {
+          if (staticClassName === undefined) {
+            className += getRegisteredStyles(
+              classInterpolations,
+              exisingClassName
+            )
+          } else {
+            className += `${exisingClassName} `
+          }
+        }
+        if (staticClassName === undefined) {
+          const ctx = {
+            mergedProps: assign({ theme: injections.theme }, props)
+          }
+          className += css.apply(ctx, styles.concat(classInterpolations))
+        } else {
+          className += staticClassName
+        }
+        if (stableClassName !== undefined) {
+          className += ` ${stableClassName}`
+        }
+
+        return h(tag, assign({}, data, { attrs, class: className }), children)
       }
-      let localTag = tag
-
-      const finalObjs = []
-
-      if (tag.__emotion_spec) {
-        push(
-          finalObjs,
-          reduce(
-            tag.__emotion_spec,
-            (accum, spec) => {
-              push(accum, spec.objs)
-              if (spec.content) {
-                push(accum, spec.content.apply(null, map(spec.vars, getValue)))
-              }
-              accum.push(spec.cls)
-              return accum
-            },
-            []
-          )
-        )
-        localTag = tag.__emotion_spec[0].tag
-      }
-
-      push(finalObjs, objs)
-
-      finalObjs.push(cls)
-
-      if (content) {
-        push(finalObjs, content.apply(null, map(vars, getValue)))
-      }
-
-      const className = css(map(finalObjs, getValue))
-
-      return h(
-        localTag,
-        assign({}, ctx.data, {
-          class: [ctx.data.class, className]
-        }),
-        ctx.children
-      )
     }
-  }
 
-  const spec = {
-    vars,
-    content,
-    objs,
-    tag,
-    cls
+    Styled[STYLES_KEY] = styles
+    Styled.__emotion_base = baseTag
+    Styled.__emotion_real = Styled
+    Object.defineProperty(Styled, 'toString', {
+      enumerable: false,
+      value() {
+        if (
+          process.env.NODE_ENV !== 'production' &&
+          stableClassName === undefined
+        ) {
+          return 'NO_COMPONENT_SELECTOR'
+        }
+        return `.${stableClassName}`
+      }
+    })
+
+    return Styled
   }
-  Styled.__emotion_spec = tag.__emotion_spec
-    ? tag.__emotion_spec.concat(spec)
-    : [spec]
-  Styled.__emotion_class = cls
-  return Styled
 }

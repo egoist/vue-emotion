@@ -1,0 +1,12 @@
+{
+  "presets": [["poi", { "jsx": "vue" }]],
+  "plugins": [
+    [
+      "emotion",
+      {
+        "sourceMap": true,
+        "autoLabel": true
+      }
+    ]
+  ]
+}

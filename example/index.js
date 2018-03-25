@@ -1,89 +1,41 @@
 import Vue from 'vue'
-import styled, { theme } from '../src'
-
-const color = theme('mode', {
-  light: 'black',
-  dark: 'white'
-})
-
-const backgroundColor = theme('mode', {
-  light: 'white',
-  dark: 'black'
-})
+import styled from 'vue-emotion'
 
 const Button = styled('button')`
-  color: ${color};
-  background-color: ${backgroundColor};
-  border: 1px solid ${color};
-  padding: 10px 20px;
-  font-size: ${props => props.fontSize};
+  color: ${props => props.theme.color};
+  font-size: 1rem;
 `
 
-const Controls = styled('div')`
-  background-color: #f0f0f0;
-  padding: 10px;
-  margin-bottom: 10px;
+const BlueButton = styled(Button)`
+  color: blue;
+  font-size: 33px;
+  background: yellow;
 `
 
-const App = {
-  name: 'app',
-
-  data() {
-    return {
-      theme: {
-        mode: 'light'
-      },
-      fontSize: 16
-    }
-  },
-
-  provide() {
-    return {
-      theme: this.theme
-    }
-  },
-
-  methods: {
-    updateMode(e) {
-      this.theme.mode = e.target.value
-    },
-
-    updateFontSize(e) {
-      this.fontSize = e.target.value
-    }
-  },
-
-  render() {
-    return (
-      <div>
-        <Controls>
-          Theme:{' '}
-          <select onChange={this.updateMode}>
-            <option
-              value="light"
-              selected={this.theme.mode === 'light'}>
-              Light
-            </option>
-            <option
-              value="dark"
-              selected={this.theme.mode === 'dark'}>
-              Dark
-            </option>
-          </select>
-          {' '}Font Size:{' '}
-          <input
-            type="number"
-            value={this.fontSize}
-            onInput={this.updateFontSize}
-          />
-        </Controls>
-        <Button class="foo" fontSize={this.fontSize}>Button</Button>
-      </div>
-    )
+const Container = styled('div')`
+  ${BlueButton.toString()} {
+    color: orange;
   }
-}
+`
 
 new Vue({
   el: '#app',
-  render: h => h(App)
+  data: {
+    count: 0
+  },
+  provide() {
+    return {
+      theme: {
+        color: 'green'
+      }
+    }
+  },
+  render() {
+    return (
+      <Container>
+        <Button onClick={() => this.count++}>{this.count}</Button>
+        <BlueButton onClick={() => this.count++}>{this.count}</BlueButton>
+      </Container>
+    )
+  }
 })

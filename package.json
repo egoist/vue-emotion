@@ -7,7 +7,7 @@
     "type": "git"
   },
   "module": "dist/vue-emotion.es.js",
-  "main": "dist/vue-emotion.common.js",
+  "main": "dist/vue-emotion.cjs.js",
   "cdn": "dist/vue-emotion.min.js",
   "unpkg": "dist/vue-emotion.min.js",
   "files": [
@@ -16,41 +16,21 @@
   "scripts": {
     "test": "npm run lint && echo 'no tests!'",
     "lint": "xo",
-    "prepublish": "npm run build",
-    "build": "bili --format umd,cjs,es,umdCompress --module-name emotionVue --exports named",
+    "prepublishOnly": "npm run build",
+    "build": "bili --format umd,cjs,es,umd-min --module-name emotionVue --exports named",
     "example": "poi",
     "build:example": "poi build",
     "toc": "markdown-toc -i README.md"
   },
   "author": "EGOIST <0x142857@gmail.com>",
   "license": "MIT",
-  "poi": {
-    "entry": "example/index.js",
-    "dist": "example/dist",
-    "homepage": "/"
-  },
-  "babel": {
-    "presets": [
-      [
-        "vue-app",
-        {
-          "useBuiltIns": true
-        }
-      ]
-    ],
-    "plugins": [
-      "emotion/babel"
-    ]
-  },
-  "dependencies": {
-    "emotion-utils": "^7.1.0"
-  },
   "devDependencies": {
-    "bili": "^0.17.0",
-    "emotion": "^7.2.0",
+    "babel-plugin-emotion": "^9.1.0",
+    "bili": "^3.0.13",
+    "emotion": "^9.1.0",
     "eslint-config-rem": "^3.0.0",
     "markdown-toc": "^1.1.0",
-    "poi": "^9.3.0",
+    "poi": "^10.0.0-beta.8",
     "react": "^15.6.1",
     "xo": "^0.18.0"
   },
@@ -64,6 +44,10 @@
     }
   },
   "peerDependencies": {
-    "emotion": "^7.0.11"
+    "emotion": "^9.0.0"
+  },
+  "dependencies": {
+    "emotion-utils": "^9.1.0",
+    "nano-assign": "^1.0.0"
   }
 }
