@@ -28,17 +28,17 @@ export default (tag, options) => {
     staticClassName === undefined ? (isReal && tag.__emotion_base) || tag : tag
 
   return (...args) => {
-    let styles =
+    const styles =
       isReal && tag[STYLES_KEY] !== undefined ? tag[STYLES_KEY].slice(0) : []
     if (identifierName !== undefined) {
       styles.push(`label:${identifierName};`)
     }
     if (staticClassName === undefined) {
-      if (args[0] == null || args[0].raw === undefined) {
+      if (args[0] === null || args[0].raw === undefined) {
         styles.push.apply(styles, args)
       } else {
         styles.push(args[0][0])
-        let len = args.length
+        const len = args.length
         let i = 1
         for (; i < len; i++) {
           styles.push(args[i], args[0][i])
@@ -57,7 +57,7 @@ export default (tag, options) => {
       props: propsDefinitions,
       render(h, { data, children, props, injections }) {
         let className = ''
-        let classInterpolations = []
+        const classInterpolations = []
         const exisingClassName = stringifyClass(data.class)
         const attrs = {}
         for (const key in data.attrs) {
