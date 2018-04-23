@@ -7,7 +7,9 @@ function stringifyClass(klass) {
     return klass.join(' ')
   }
   if (typeof klass === 'object') {
-    return Object.keys(klass).filter(key => Boolean(klass[key])).join(' ')
+    return Object.keys(klass)
+      .filter(key => Boolean(klass[key]))
+      .join(' ')
   }
   return klass
 }
@@ -111,3 +113,5 @@ export default (tag, options) => {
     return Styled
   }
 }
+
+export * from 'emotion'
