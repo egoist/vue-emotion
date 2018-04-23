@@ -7,9 +7,8 @@ function stringifyClass(klass) {
     return klass.join(' ')
   }
   if (typeof klass === 'object') {
-    return Object.keys(klass)
-      .filter(key => Boolean(klass[key]))
-      .join(' ')
+    // prettier-ignore
+    return Object.keys(klass).filter(key => Boolean(klass[key])).join(' ')
   }
   return klass
 }
