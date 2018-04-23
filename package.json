@@ -10,6 +10,7 @@
   "main": "dist/vue-emotion.cjs.js",
   "cdn": "dist/vue-emotion.min.js",
   "unpkg": "dist/vue-emotion.min.js",
+  "types": "types/index.d.ts",
   "files": [
     "dist"
   ],
@@ -48,6 +49,7 @@
   },
   "dependencies": {
     "emotion-utils": "^9.1.0",
-    "nano-assign": "^1.0.0"
+    "nano-assign": "^1.0.0",
+    "vue-tsx-support": "^1.2.0"
   }
 }
