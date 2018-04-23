@@ -49,7 +49,6 @@
   },
   "dependencies": {
     "emotion-utils": "^9.1.0",
-    "nano-assign": "^1.0.0",
-    "vue-tsx-support": "^1.2.0"
+    "nano-assign": "^1.0.0"
   }
 }
