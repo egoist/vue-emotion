@@ -1,4 +1,4 @@
-import { css, injectGlobal, getRegisteredStyles } from 'emotion'
+import { css, getRegisteredStyles } from 'emotion'
 import assign from 'nano-assign'
 import { STYLES_KEY } from 'emotion-utils'
 
@@ -114,4 +114,4 @@ export default (tag, options) => {
   }
 }
 
-export { css, injectGlobal }
+export * from 'emotion'
