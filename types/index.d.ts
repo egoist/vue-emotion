@@ -22,26 +22,22 @@ export interface Options {
   string?: string
 }
 
-export type ThemedProps<Props, Theme> = Props & {
-  theme: Theme
-}
-
 type ElementProps<
   Tag extends keyof JSX.IntrinsicElements
 > = JSX.IntrinsicElements[Tag]
 
-export interface StyledComponent<Props, Theme, IntrinsicProps>
+export interface StyledComponent<Props, IntrinsicProps>
   extends TsxComponent<Vue, Props & IntrinsicProps> {
   withComponent<Tag extends keyof JSX.IntrinsicElements>(
     tag: Tag
-  ): StyledComponent<Props, Theme, ElementProps<Tag>>
+  ): StyledComponent<Props, ElementProps<Tag>>
 
-  withComponent(component: any): StyledComponent<Props, Theme, {}>
+  withComponent(component: any): StyledComponent<Props, {}>
 
   displayName: string
   __emotion_styles: string[]
   __emotion_base: string | {}
-  __emotion_real: ThemedVueEmotionInterface<Theme>
+  __emotion_real: ThemedVueEmotionInterface
 }
 
 export type ObjectStyleAttributes =
@@ -49,66 +45,59 @@ export type ObjectStyleAttributes =
   | object[]
   | { [key: string]: ObjectStyleAttributes }
 
-export interface CreateStyled<Props, Theme, IntrinsicProps> {
+export interface CreateStyled<Props, IntrinsicProps> {
   // overload for template string as styles
   (
     strings: TemplateStringsArray,
-    ...vars: Array<Interpolation<ThemedProps<Props & IntrinsicProps, Theme>>>
-  ): StyledComponent<Props, Theme, IntrinsicProps>
+    ...vars: Array<Interpolation<Props & IntrinsicProps>>
+  ): StyledComponent<Props, IntrinsicProps>
 
   // overload for object as styles
   (
     ...styles: Array<
       | ObjectStyleAttributes
-      | ((
-          props: ThemedProps<Props & IntrinsicProps, Theme>
-        ) => ObjectStyleAttributes)
+      | ((props: Props & IntrinsicProps) => ObjectStyleAttributes)
     >
-  ): StyledComponent<Props, Theme, IntrinsicProps>
+  ): StyledComponent<Props, IntrinsicProps>
 }
 
-type ShorthandsFactories<Theme> = {
+type ShorthandsFactories = {
   [Tag in keyof JSX.IntrinsicElements]: {
     // overload for template string as styles
     <Props = {}>(
       strings: TemplateStringsArray,
-      ...vars: Array<
-        Interpolation<ThemedProps<Props & JSX.IntrinsicElements[Tag], Theme>>
-      >
-    ): StyledComponent<Props, Theme, ElementProps<Tag>>
+      ...vars: Array<Interpolation<Props & JSX.IntrinsicElements[Tag]>>
+    ): StyledComponent<Props, ElementProps<Tag>>
 
     // overload for object as styles
     <Props = {}>(
       ...styles: Array<
         | ObjectStyleAttributes
-        | ((
-            props: ThemedProps<Props & JSX.IntrinsicElements[Tag], Theme>
-          ) => ObjectStyleAttributes)
+        | ((props: Props & JSX.IntrinsicElements[Tag]) => ObjectStyleAttributes)
       >
-    ): StyledComponent<Props, Theme, ElementProps<Tag>>
+    ): StyledComponent<Props, ElementProps<Tag>>
   }
 }
 
-export interface ThemedVueEmotionInterface<Theme>
-  extends ShorthandsFactories<Theme> {
+export interface ThemedVueEmotionInterface extends ShorthandsFactories {
   // overload for dom tag
   <Props, Tag extends keyof JSX.IntrinsicElements>(
     tag: Tag,
     options?: Options
   ): // tslint:disable-next-line:no-unnecessary-generics
-  CreateStyled<Props, Theme, ElementProps<Tag>>
+  CreateStyled<Props, ElementProps<Tag>>
 
   // overload for component
   <Props, CustomProps>(
     component: any,
     options?: Options
   ): // tslint:disable-next-line:no-unnecessary-generics
-  CreateStyled<Props & CustomProps, Theme, {}>
+  CreateStyled<Props & CustomProps, {}>
 }
 
-export interface ThemedVueEmotionModule<Theme> {
-  default: ThemedVueEmotionInterface<Theme>
+export interface ThemedVueEmotionModule {
+  default: ThemedVueEmotionInterface
 }
 
-declare const styled: ThemedVueEmotionInterface<any>
+declare const styled: ThemedVueEmotionInterface
 export default styled

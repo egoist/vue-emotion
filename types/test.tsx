@@ -59,24 +59,6 @@ Component = styled<CustomProps, 'div'>('div')`
 mount = <Component lookColor="red" />
 
 /*
- * With explicit theme
- */
-
-interface Theme {
-  color: {
-    primary: string
-    secondary: string
-  }
-}
-
-const _styled = styled as ThemedVueEmotionInterface<Theme>
-
-Component = _styled.div`
-  color: ${props => props.theme.color.primary}
-`
-mount = <Component onClick={(event: any) => event} />
-
-/*
  * withComponent
  */
 
