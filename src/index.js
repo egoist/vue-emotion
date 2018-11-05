@@ -90,7 +90,7 @@ export default (tag, options) => {
           className += ` ${stableClassName}`
         }
 
-        return h(tag, assign({}, data, { attrs, class: className }), children)
+        return h(tag, assign({}, data, { domProps: attrs, class: className }), children)
       }
     }
 
