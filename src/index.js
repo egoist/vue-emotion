@@ -62,9 +62,14 @@ export default (tag, options) => {
         const classInterpolations = []
         const exisingClassName = stringifyClass(data.class)
         const attrs = {}
+        const domProps = {}
         for (const key in data.attrs) {
           if (key[0] !== '$') {
-            attrs[key] = data.attrs[key]
+            if (key === 'value') {
+              domProps[key] = data.attrs[key]
+            } else {
+              attrs[key] = data.attrs[key]
+            }
           }
         }
 
@@ -90,7 +95,7 @@ export default (tag, options) => {
           className += ` ${stableClassName}`
         }
 
-        return h(tag, assign({}, data, { domProps: attrs, class: className }), children)
+        return h(tag, assign({}, data, { attrs, domProps, class: className }), children)
       }
     }
 
