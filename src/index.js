@@ -14,7 +14,7 @@ function stringifyClass(klass) {
   return klass
 }
 
-export default (tag, options) => {
+export default function createStyled(tag, options) {
   let staticClassName
   let identifierName
   let stableClassName
@@ -54,7 +54,7 @@ export default (tag, options) => {
     }
 
     const Styled = {
-      name: `Styled(${tag.name || identifierName || tag || 'Component'})`,
+      name: `Styled${tag.name || identifierName || tag || 'Component'}`,
       functional: true,
       inject: {
         theme: {
@@ -68,7 +68,6 @@ export default (tag, options) => {
         const exisingClassName = stringifyClass(data.class)
         const attrs = {}
         const domProps = {}
-        const mergedProps = assign({ theme: injections.theme }, props)
 
         for (const key in data.attrs) {
           if (key[0] !== '$') {
@@ -79,6 +78,11 @@ export default (tag, options) => {
             }
           }
         }
+
+        const mergedProps = assign(
+          { theme: attrs.theme || injections.theme },
+          props
+        )
 
         if (exisingClassName) {
           if (staticClassName === undefined) {
@@ -116,9 +120,10 @@ export default (tag, options) => {
       }
     }
 
-    Styled[STYLES_KEY] = styles
-    Styled.__emotion_base = baseTag
     Styled.__emotion_real = Styled
+    Styled.__emotion_base = baseTag
+    Styled.__emotion_styles = styles
+
     Object.defineProperty(Styled, 'toString', {
       enumerable: false,
       value() {
@@ -131,6 +136,16 @@ export default (tag, options) => {
         return `.${stableClassName}`
       }
     })
+
+    Styled.withComponent = (nextTag, nextOptions) => {
+      nextOptions.props = assign(tag.props || {}, nextOptions.props || {})
+      return createStyled(
+        nextTag,
+        nextOptions !== undefined
+          ? { ...(options || {}), ...nextOptions }
+          : options
+      )(...styles)
+    }
 
     return Styled
   }

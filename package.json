@@ -29,13 +29,24 @@
     "@babel/node": "^7.0.0",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/preset-env": "^7.1.6",
+    "@vue/test-utils": "^1.0.0-beta.25",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
     "babel-plugin-emotion": "^9.1.0",
     "bili": "^3.0.13",
     "emotion": "^9.1.0",
     "eslint-config-rem": "^3.0.0",
+    "jest": "^23.6.0",
+    "jest-emotion": "^9.2.11",
+    "jest-serializer-vue": "^2.0.2",
     "markdown-toc": "^1.1.0",
     "poi": "^10.0.0-beta.8",
     "react": "^15.6.1",
+    "regenerator-runtime": "^0.13.1",
+    "vue": "^2.5.17",
+    "vue-jest": "^3.0.0",
+    "vue-template-compiler": "^2.5.17",
+    "vue-testing-library": "^0.6.3",
     "xo": "^0.18.0"
   },
   "xo": {
@@ -53,5 +64,26 @@
   "dependencies": {
     "emotion-utils": "^9.1.0",
     "nano-assign": "^1.0.0"
+  },
+  "jest": {
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "vue"
+    ],
+    "snapshotSerializers": [
+      "jest-serializer-vue",
+      "jest-emotion/serializer"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "transform": {
+      "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
+      ".*\\.(vue)$": "<rootDir>/node_modules/vue-jest"
+    }
   }
 }
