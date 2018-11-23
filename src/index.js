@@ -1,6 +1,5 @@
 import { css, getRegisteredStyles } from 'emotion'
 import assign from 'nano-assign'
-import { STYLES_KEY } from 'emotion-utils'
 
 function stringifyClass(klass) {
   if (Array.isArray(klass)) {
@@ -14,59 +13,60 @@ function stringifyClass(klass) {
   return klass
 }
 
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1)
+}
+
 export default function createStyled(tag, options) {
-  let staticClassName
   let identifierName
-  let stableClassName
+  let targetClassName
   let propsDefinitions
   if (options !== undefined) {
-    staticClassName = options.e
     identifierName = options.label || tag.name
-    stableClassName = options.target
+    targetClassName = options.target
     propsDefinitions = options.props || {}
   }
 
   propsDefinitions = assign(tag.props || {}, propsDefinitions)
 
   const isReal = tag.__emotion_real === tag
-  const baseTag =
-    staticClassName === undefined ? (isReal && tag.__emotion_base) || tag : tag
+  const baseTag = (isReal && tag.__emotion_base) || tag
 
   return (...args) => {
     const styles =
-      isReal && tag[STYLES_KEY] !== undefined ? tag[STYLES_KEY].slice(0) : []
+      isReal && tag.__emotion_styles !== undefined
+        ? tag.__emotion_styles.slice(0)
+        : []
 
     if (identifierName !== undefined) {
       styles.push(`label:${identifierName};`)
     }
 
-    if (staticClassName === undefined) {
-      if (args[0] === null || args[0].raw === undefined) {
-        styles.push.apply(styles, args)
-      } else {
-        styles.push(args[0][0])
-        const len = args.length
-        let i = 1
-        for (; i < len; i++) {
-          styles.push(args[i], args[0][i])
-        }
+    if (args[0] === null || args[0].raw === undefined) {
+      styles.push.apply(styles, args)
+    } else {
+      styles.push(args[0][0])
+      const len = args.length
+      let i = 1
+      for (; i < len; i++) {
+        styles.push(args[i], args[0][i])
       }
     }
 
     const Styled = {
-      name: `Styled${tag.name || identifierName || tag || 'Component'}`,
-      inject: {
-        theme: {
-          default: null
-        }
-      },
+      name: `Styled${tag.name ||
+        identifierName ||
+        capitalizeFirstLetter(tag) ||
+        'Component'}`,
+      inject: { theme: { default: null } },
       props: propsDefinitions,
       render(h) {
-        let className = ''
+        const finalTag = this.$attrs.as || baseTag
         const classInterpolations = []
-        const exisingClassName = stringifyClass(this.$data.class)
-        const attrs = {}
-        const domProps = {}
+
+        let className = ''
+        let attrs = {}
+        let domProps = {}
 
         for (const key in this.$attrs) {
           if (key[0] !== '$') {
@@ -78,40 +78,45 @@ export default function createStyled(tag, options) {
           }
         }
 
-        const mergedProps = assign({ theme: this.$attrs.theme }, this.$props)
+        let mergedProps = this.$props
 
-        if (exisingClassName) {
-          if (staticClassName === undefined) {
-            className += getRegisteredStyles(
-              classInterpolations,
-              exisingClassName
-            )
-          } else {
-            className += `${exisingClassName} `
+        if (attrs.theme == null) {
+          mergedProps = {}
+          for (let key in this.$props) {
+            mergedProps[key] = this.$props[key]
           }
+          mergedProps.theme = this.theme
         }
 
-        if (staticClassName === undefined) {
-          const context = {
-            mergedProps
-          }
-          className += css.apply(context, styles.concat(classInterpolations))
-        } else {
-          className += staticClassName
+        const existingClassName = stringifyClass(attrs.class)
+
+        // Delete any no longer needed attributes
+        delete attrs.class
+        delete attrs.as
+
+        if (existingClassName) {
+          className += getRegisteredStyles(
+            classInterpolations,
+            existingClassName
+          )
         }
-        if (stableClassName !== undefined) {
-          className += ` ${stableClassName}`
+
+        const context = { mergedProps }
+        className += css.apply(context, styles.concat(classInterpolations))
+
+        if (targetClassName !== undefined) {
+          className += ` ${targetClassName}`
         }
 
         return h(
-          tag,
+          finalTag,
           assign({}, this.$data, {
-            attrs: this.$attrs,
+            attrs,
             props: mergedProps,
             domProps,
             class: className
           }),
-          this.$children
+          this.$slots.default
         )
       }
     }
@@ -125,11 +130,11 @@ export default function createStyled(tag, options) {
       value() {
         if (
           process.env.NODE_ENV !== 'production' &&
-          stableClassName === undefined
+          targetClassName === undefined
         ) {
           return 'NO_COMPONENT_SELECTOR'
         }
-        return `.${stableClassName}`
+        return `.${targetClassName}`
       }
     })
 

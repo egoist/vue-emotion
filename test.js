@@ -1,6 +1,11 @@
 import { mount } from '@vue/test-utils'
 import styled from './src'
 
+const StyledDiv = styled('div')`
+  background-color: black;
+  color: white;
+`
+
 const Box = {
   name: 'Box',
   props: {
@@ -18,7 +23,7 @@ const Box = {
     }
   },
   render() {
-    return <div>Hello</div>
+    return <div>Hello world</div>
   }
 }
 
@@ -29,13 +34,15 @@ const StyledBox = styled(Box)`
   background-color: ${props => (props.theme === 'light' ? 'white' : 'blue')};
 `
 
-test('should render html with the correct styles', () => {
+test('it should apply styles to a regular html element', () => {
+  const wrapper = mount(StyledDiv)
+  expect(wrapper.element).toMatchSnapshot()
+})
+
+test('it should apply styles to a component', () => {
   const wrapper = mount(StyledBox, {
     propsData: {
       display: 'flex'
-    },
-    attrs: {
-      theme: 'light'
     }
   })
   expect(wrapper.element).toMatchSnapshot()
@@ -45,10 +52,12 @@ test('withComponent works as expected', () => {
   const StyledBoxSection = StyledBox.withComponent('section')
 
   const wrapper = mount(StyledBoxSection, {
+    slots: {
+      default: 'Hello world'
+    },
     propsData: {
       padding: '2em',
-      valid: true,
-      theme: 'light'
+      valid: true
     }
   })
 

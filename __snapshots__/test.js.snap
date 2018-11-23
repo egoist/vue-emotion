@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should render html with the correct styles 1`] = `
+exports[`it should apply styles to a component 1`] = `
 .emotion-0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -8,15 +8,25 @@ exports[`should render html with the correct styles 1`] = `
   display: flex;
   padding: 10px;
   color: red;
-  background-color: white;
+  background-color: blue;
 }
 
 <div
   class="emotion-0 emotion-1"
-  theme="light"
 >
-  Hello
+  Hello world
 </div>
+`;
+
+exports[`it should apply styles to a regular html element 1`] = `
+.emotion-0 {
+  background-color: black;
+  color: white;
+}
+
+<div
+  class="emotion-0 emotion-1"
+/>
 `;
 
 exports[`withComponent works as expected 1`] = `
@@ -24,11 +34,12 @@ exports[`withComponent works as expected 1`] = `
   display: block;
   padding: 2em;
   color: green;
-  background-color: white;
+  background-color: blue;
 }
 
 <section
   class="emotion-0 emotion-1"
-  theme="light"
-/>
+>
+  Hello world
+</section>
 `;
