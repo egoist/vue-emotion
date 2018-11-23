@@ -114,6 +114,7 @@ export default function createStyled(tag, options) {
             attrs,
             props: mergedProps,
             domProps,
+            on: this.$listeners,
             class: className
           }),
           this.$slots.default
