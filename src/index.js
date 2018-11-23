@@ -79,7 +79,6 @@ export default function createStyled(tag, options) {
         }
 
         const mergedProps = assign({ theme: this.$attrs.theme }, this.$props)
-        console.log(mergedProps)
 
         if (exisingClassName) {
           if (staticClassName === undefined) {
