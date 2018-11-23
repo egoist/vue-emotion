@@ -1,5 +1,5 @@
 {
-  "presets": [["poi", { "jsx": "vue" }]],
+  "presets": [["poi", { "jsx": "vue" }], "@babel/preset-env"],
   "plugins": [
     [
       "emotion",
@@ -8,6 +8,7 @@
         "autoLabel": true
       }
     ],
+    "@babel/plugin-syntax-dynamic-import",
     "@babel/plugin-transform-runtime"
   ]
 }

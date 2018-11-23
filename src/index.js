@@ -21,10 +21,13 @@ export default (tag, options) => {
   let propsDefinitions
   if (options !== undefined) {
     staticClassName = options.e
-    identifierName = options.label
+    identifierName = options.label || tag.name
     stableClassName = options.target
-    propsDefinitions = options.props
+    propsDefinitions = options.props || {}
   }
+
+  propsDefinitions = assign(tag.props || {}, propsDefinitions)
+
   const isReal = tag.__emotion_real === tag
   const baseTag =
     staticClassName === undefined ? (isReal && tag.__emotion_base) || tag : tag
@@ -32,9 +35,11 @@ export default (tag, options) => {
   return (...args) => {
     const styles =
       isReal && tag[STYLES_KEY] !== undefined ? tag[STYLES_KEY].slice(0) : []
+
     if (identifierName !== undefined) {
       styles.push(`label:${identifierName};`)
     }
+
     if (staticClassName === undefined) {
       if (args[0] === null || args[0].raw === undefined) {
         styles.push.apply(styles, args)
@@ -49,7 +54,7 @@ export default (tag, options) => {
     }
 
     const Styled = {
-      name: `Styled${tag.name || identifierName || 'Component'}`,
+      name: `Styled(${tag.name || identifierName || tag || 'Component'})`,
       functional: true,
       inject: {
         theme: {
@@ -63,6 +68,8 @@ export default (tag, options) => {
         const exisingClassName = stringifyClass(data.class)
         const attrs = {}
         const domProps = {}
+        const mergedProps = assign({ theme: injections.theme }, props)
+
         for (const key in data.attrs) {
           if (key[0] !== '$') {
             if (key === 'value') {
@@ -83,11 +90,12 @@ export default (tag, options) => {
             className += `${exisingClassName} `
           }
         }
+
         if (staticClassName === undefined) {
-          const ctx = {
-            mergedProps: assign({ theme: injections.theme }, props)
+          const context = {
+            mergedProps
           }
-          className += css.apply(ctx, styles.concat(classInterpolations))
+          className += css.apply(context, styles.concat(classInterpolations))
         } else {
           className += staticClassName
         }
@@ -95,7 +103,16 @@ export default (tag, options) => {
           className += ` ${stableClassName}`
         }
 
-        return h(tag, assign({}, data, { attrs, domProps, class: className }), children)
+        return h(
+          tag,
+          assign({}, data, {
+            attrs,
+            props: mergedProps,
+            domProps,
+            class: className
+          }),
+          children
+        )
       }
     }
 
