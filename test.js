@@ -23,7 +23,7 @@ const Box = {
     }
   },
   render() {
-    return <div>Hello world</div>
+    return <div ref="hello-world">Hello world</div>
   }
 }
 
@@ -35,7 +35,17 @@ const StyledBox = styled(Box)`
 `
 
 test('it should apply styles to a regular html element', () => {
-  const wrapper = mount(StyledDiv)
+  const wrapper = mount(StyledDiv, {
+    slots: {
+      default: 'Hello world'
+    },
+    style: {
+      borderColor: 'black'
+    },
+    ref: 'my-div',
+    key: 0,
+    on: { click: () => console.log('click') }
+  })
   expect(wrapper.element).toMatchSnapshot()
 })
 

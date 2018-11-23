@@ -26,7 +26,10 @@ exports[`it should apply styles to a regular html element 1`] = `
 
 <div
   class="emotion-0 emotion-1"
-/>
+  style="border-color: black;"
+>
+  Hello world
+</div>
 `;
 
 exports[`withComponent works as expected 1`] = `

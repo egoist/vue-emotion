@@ -60,7 +60,7 @@ export default function createStyled(tag, options) {
         'Component'}`,
       inject: { theme: { default: null } },
       props: propsDefinitions,
-      render(h) {
+      render(createElement) {
         const finalTag = this.$attrs.as || baseTag
         const classInterpolations = []
 
@@ -107,14 +107,13 @@ export default function createStyled(tag, options) {
         if (targetClassName !== undefined) {
           className += ` ${targetClassName}`
         }
-
-        return h(
+        //https://vuejs.org/v2/guide/render-function.html#createElement-Arguments
+        return createElement(
           finalTag,
-          assign({}, this.$data, {
+          assign({}, this.$options, {
             attrs,
             props: mergedProps,
             domProps,
-            on: this.$listeners,
             class: className
           }),
           this.$slots.default
