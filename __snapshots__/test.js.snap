@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render html with the correct styles 1`] = `
+.emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 10px;
+  color: red;
+  background-color: white;
+}
+
+<div
+  class="emotion-0 emotion-1"
+  theme="light"
+>
+  Hello
+</div>
+`;
+
+exports[`withComponent works as expected 1`] = `
+.emotion-0 {
+  display: block;
+  padding: 2em;
+  color: green;
+  background-color: white;
+}
+
+<section
+  class="emotion-0 emotion-1"
+  theme="light"
+/>
+`;

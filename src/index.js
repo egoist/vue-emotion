@@ -55,34 +55,31 @@ export default function createStyled(tag, options) {
 
     const Styled = {
       name: `Styled${tag.name || identifierName || tag || 'Component'}`,
-      functional: true,
       inject: {
         theme: {
           default: null
         }
       },
       props: propsDefinitions,
-      render(h, { data, children, props, injections }) {
+      render(h) {
         let className = ''
         const classInterpolations = []
-        const exisingClassName = stringifyClass(data.class)
+        const exisingClassName = stringifyClass(this.$data.class)
         const attrs = {}
         const domProps = {}
 
-        for (const key in data.attrs) {
+        for (const key in this.$attrs) {
           if (key[0] !== '$') {
             if (key === 'value') {
-              domProps[key] = data.attrs[key]
+              domProps[key] = this.$attrs[key]
             } else {
-              attrs[key] = data.attrs[key]
+              attrs[key] = this.$attrs[key]
             }
           }
         }
 
-        const mergedProps = assign(
-          { theme: attrs.theme || injections.theme },
-          props
-        )
+        const mergedProps = assign({ theme: this.$attrs.theme }, this.$props)
+        console.log(mergedProps)
 
         if (exisingClassName) {
           if (staticClassName === undefined) {
@@ -109,13 +106,13 @@ export default function createStyled(tag, options) {
 
         return h(
           tag,
-          assign({}, data, {
-            attrs,
+          assign({}, this.$data, {
+            attrs: this.$attrs,
             props: mergedProps,
             domProps,
             class: className
           }),
-          children
+          this.$children
         )
       }
     }
