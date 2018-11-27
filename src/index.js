@@ -27,10 +27,10 @@ export default function createStyled(tag, options) {
     propsDefinitions = options.props || {}
   }
 
-  propsDefinitions = assign(tag.props || {}, propsDefinitions)
-
   const isReal = tag.__emotion_real === tag
   const baseTag = (isReal && tag.__emotion_base) || tag
+
+  propsDefinitions = assign(baseTag.props || {}, propsDefinitions)
 
   return (...args) => {
     const styles =
