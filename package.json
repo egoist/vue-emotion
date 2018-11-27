@@ -62,7 +62,10 @@
     "emotion": "^9.0.0"
   },
   "dependencies": {
-    "emotion-utils": "^9.1.0",
+    "@emotion/cache": "^10.0.0-beta.13",
+    "@emotion/is-prop-valid": "^0.7.1",
+    "@emotion/serialize": "^0.11.0",
+    "@emotion/utils": "^0.11.1",
     "nano-assign": "^1.0.0"
   },
   "jest": {

@@ -1,5 +1,13 @@
-import { css, getRegisteredStyles } from 'emotion'
-import assign from 'nano-assign'
+import { getRegisteredStyles, insertStyles } from '@emotion/utils'
+import createCache from '@emotion/cache'
+import { serializeStyles } from '@emotion/serialize'
+import { getDefaultShouldForwardProp } from './utils'
+
+const cache = createCache()
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1)
+}
 
 function stringifyClass(klass) {
   if (Array.isArray(klass)) {
@@ -13,27 +21,34 @@ function stringifyClass(klass) {
   return klass
 }
 
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1)
-}
-
 export default function createStyled(tag, options) {
   let identifierName
+  let shouldForwardProp
   let targetClassName
-  let propsDefinitions
   if (options !== undefined) {
-    identifierName = options.label || tag.name
+    identifierName = options.label
     targetClassName = options.target
-    propsDefinitions = options.props || {}
+    shouldForwardProp =
+      tag.__emotion_forwardProp && options.shouldForwardProp
+        ? propName =>
+            tag.__emotion_forwardProp(propName) &&
+            options.shouldForwardProp(propName)
+        : options.shouldForwardProp
   }
 
   const isReal = tag.__emotion_real === tag
   const baseTag = (isReal && tag.__emotion_base) || tag
 
-  propsDefinitions = assign(baseTag.props || {}, propsDefinitions)
+  if (typeof shouldForwardProp !== 'function' && isReal) {
+    shouldForwardProp = tag.__emotion_forwardProp
+  }
+
+  let defaultShouldForwardProp =
+    shouldForwardProp || getDefaultShouldForwardProp(baseTag)
+  const shouldUseAs = !defaultShouldForwardProp('as')
 
   return (...args) => {
-    const styles =
+    let styles =
       isReal && tag.__emotion_styles !== undefined
         ? tag.__emotion_styles.slice(0)
         : []
@@ -41,97 +56,102 @@ export default function createStyled(tag, options) {
     if (identifierName !== undefined) {
       styles.push(`label:${identifierName};`)
     }
-
-    if (args[0] === null || args[0].raw === undefined) {
+    if (args[0] == null || args[0].raw === undefined) {
       styles.push.apply(styles, args)
     } else {
       styles.push(args[0][0])
-      const len = args.length
+      let len = args.length
       let i = 1
       for (; i < len; i++) {
         styles.push(args[i], args[0][i])
       }
     }
 
+    const displayName = `Styled${tag.name ||
+      identifierName ||
+      capitalizeFirstLetter(tag) ||
+      'Component'}`
+
     const Styled = {
-      name: `Styled${tag.name ||
-        identifierName ||
-        capitalizeFirstLetter(tag) ||
-        'Component'}`,
+      name: displayName,
+      functional: true,
       inject: { theme: { default: null } },
-      props: propsDefinitions,
-      render(createElement) {
-        const finalTag = this.$attrs.as || baseTag
-        const classInterpolations = []
+      render(createElement, { props, injections, data, children }) {
+        const { theme } = injections
+        const finalTag = (shouldUseAs && props.as) || baseTag
 
         let className = ''
-        let attrs = {}
-        let domProps = {}
+        let classInterpolations = []
+        let mergedProps = props
 
-        for (const key in this.$attrs) {
-          if (key[0] !== '$') {
-            if (key === 'value') {
-              domProps[key] = this.$attrs[key]
-            } else {
-              attrs[key] = this.$attrs[key]
-            }
-          }
-        }
-
-        let mergedProps = this.$props
-
-        if (attrs.theme == null) {
+        if (props.theme == null) {
           mergedProps = {}
-          for (let key in this.$props) {
-            mergedProps[key] = this.$props[key]
+          for (let key in props) {
+            mergedProps[key] = props[key]
           }
-          mergedProps.theme = this.theme
+          mergedProps.theme = theme
         }
 
-        const existingClassName = stringifyClass(attrs.class)
+        const existingClasses = stringifyClass(data.class)
 
-        // Delete any no longer needed attributes
-        delete attrs.class
-        delete attrs.as
-
-        if (existingClassName) {
+        if (existingClasses) {
           className += getRegisteredStyles(
+            cache.registered,
             classInterpolations,
-            existingClassName
+            existingClasses
           )
         }
 
-        const context = { mergedProps }
-        className += css.apply(context, styles.concat(classInterpolations))
+        const serialized = serializeStyles(
+          styles.concat(classInterpolations),
+          cache.registered,
+          mergedProps
+        )
+
+        const rules = insertStyles(
+          cache,
+          serialized,
+          typeof finalTag === 'string'
+        )
+
+        className += `${cache.key}-${serialized.name}`
 
         if (targetClassName !== undefined) {
           className += ` ${targetClassName}`
         }
-        //https://vuejs.org/v2/guide/render-function.html#createElement-Arguments
-        return createElement(
-          finalTag,
-          assign({}, this.$options, {
-            attrs,
-            props: mergedProps,
-            domProps,
-            on: this.$listeners,
-            class: className
-          }),
-          this.$slots.default
-        )
+
+        const finalShouldForwardProp =
+          shouldUseAs && shouldForwardProp === undefined
+            ? getDefaultShouldForwardProp(finalTag)
+            : defaultShouldForwardProp
+
+        let newProps = {}
+
+        for (let key in props) {
+          if (shouldUseAs && key === 'as') continue
+
+          if (finalShouldForwardProp(key)) {
+            newProps[key] = props[key]
+          }
+        }
+
+        // https://vuejs.org/v2/guide/render-function.html#createElement-Arguments
+        const newData = { ...data, class: className }
+
+        return createElement(finalTag, newData, children)
       }
     }
 
     Styled.__emotion_real = Styled
     Styled.__emotion_base = baseTag
     Styled.__emotion_styles = styles
+    Styled.__emotion_forwardProp = shouldForwardProp
 
     Object.defineProperty(Styled, 'toString', {
-      enumerable: false,
       value() {
         if (
-          process.env.NODE_ENV !== 'production' &&
-          targetClassName === undefined
+          targetClassName === undefined &&
+          process.env.NODE_ENV !== 'production'
         ) {
           return 'NO_COMPONENT_SELECTOR'
         }
@@ -140,7 +160,6 @@ export default function createStyled(tag, options) {
     })
 
     Styled.withComponent = (nextTag, nextOptions) => {
-      nextOptions.props = assign(tag.props || {}, nextOptions.props || {})
       return createStyled(
         nextTag,
         nextOptions !== undefined

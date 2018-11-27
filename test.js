@@ -1,75 +1,62 @@
 import { mount } from '@vue/test-utils'
 import styled from './src'
 
-const StyledDiv = styled('div')`
-  background-color: black;
-  color: white;
-`
-
-const Box = {
-  name: 'Box',
-  props: {
-    display: {
-      type: String,
-      default: 'block'
-    },
-    padding: {
-      type: String,
-      default: '10px'
-    },
-    valid: {
-      type: Boolean,
-      default: false
-    }
+const props = {
+  display: {
+    type: String,
+    default: 'block'
   },
-  render() {
-    return <div ref="hello-world">Hello world</div>
+  padding: {
+    type: String,
+    default: '10px'
+  },
+  valid: {
+    type: Boolean,
+    default: false
   }
 }
 
-const StyledBox = styled(Box)`
-  display: ${props => props.display};
+const StyledBox = styled('div', { props })`
+  text-align: center;
+  display: block;
   padding: ${props => props.padding};
   color: ${props => (props.valid ? 'green' : 'red')};
   background-color: ${props => (props.theme === 'light' ? 'white' : 'blue')};
 `
 
-test('it should apply styles to a regular html element', () => {
-  const wrapper = mount(StyledDiv, {
-    slots: {
-      default: 'Hello world'
-    },
-    style: {
-      borderColor: 'black'
-    },
-    ref: 'my-div',
-    key: 0,
-    on: { click: () => console.log('click') }
-  })
-  expect(wrapper.element).toMatchSnapshot()
-})
+const Box = {
+  name: 'Box',
+  render() {
+    return <StyledBox valid>Hello</StyledBox>
+  }
+}
 
 test('it should apply styles to a component', () => {
   const wrapper = mount(StyledBox, {
-    propsData: {
-      display: 'flex'
+    context: {
+      scopedSlots: {
+        default: 'Hello World'
+      },
+      props: {
+        display: 'block'
+      }
     }
   })
   expect(wrapper.element).toMatchSnapshot()
 })
 
-test('withComponent works as expected', () => {
-  const StyledBoxSection = StyledBox.withComponent('section')
+const StyledFlex = styled(StyledBox)`
+  display: flex;
+  color: black;
+`
 
-  const wrapper = mount(StyledBoxSection, {
-    slots: {
-      default: 'Hello world'
-    },
-    propsData: {
-      padding: '2em',
-      valid: true
+test('it should be able to overrides styles of a component', () => {
+  const wrapper = mount(StyledFlex, {
+    context: {
+      props: {
+        padding: '20px'
+      }
     }
   })
-
   expect(wrapper.element).toMatchSnapshot()
 })

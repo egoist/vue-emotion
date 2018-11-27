@@ -1,48 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`it should apply styles to a component 1`] = `
-.emotion-0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  padding: 10px;
-  color: red;
-  background-color: blue;
-}
-
 <div
   class="emotion-0 emotion-1"
->
-  Hello world
-</div>
+/>
 `;
 
-exports[`it should apply styles to a regular html element 1`] = `
-.emotion-0 {
-  background-color: black;
-  color: white;
-}
-
+exports[`it should be able to overrides styles of a component 1`] = `
 <div
   class="emotion-0 emotion-1"
-  style="border-color: black;"
->
-  Hello world
-</div>
-`;
-
-exports[`withComponent works as expected 1`] = `
-.emotion-0 {
-  display: block;
-  padding: 2em;
-  color: green;
-  background-color: blue;
-}
-
-<section
-  class="emotion-0 emotion-1"
->
-  Hello world
-</section>
+/>
 `;
