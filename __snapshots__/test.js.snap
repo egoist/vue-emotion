@@ -1,13 +1,60 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`it should apply styles to a component 1`] = `
+exports[`"as" attribute should work as expected 1`] = `
+.emotion-0 {
+  text-align: center;
+  display: block;
+  padding: 10px;
+  color: red;
+  background-color: blue;
+}
+
+<section
+  class="emotion-0 emotion-1"
+/>
+`;
+
+exports[`it should apply styles to a component with custom classes and props 1`] = `
+.emotion-0 {
+  text-align: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 4rem;
+  color: red;
+  background-color: blue;
+}
+
+<div
+  class="testing emotion-0 emotion-1"
+/>
+`;
+
+exports[`theme injection should work as expected 1`] = `
+.emotion-0 {
+  text-align: center;
+  display: block;
+  padding: 10px;
+  color: red;
+  background-color: white;
+}
+
 <div
   class="emotion-0 emotion-1"
 />
 `;
 
-exports[`it should be able to overrides styles of a component 1`] = `
-<div
+exports[`withComponent should work as expected 1`] = `
+.emotion-0 {
+  text-align: center;
+  display: block;
+  padding: 10px;
+  color: red;
+  background-color: blue;
+}
+
+<aside
   class="emotion-0 emotion-1"
 />
 `;

@@ -37,7 +37,7 @@
     "emotion": "^9.1.0",
     "eslint-config-rem": "^3.0.0",
     "jest": "^23.6.0",
-    "jest-emotion": "^9.2.11",
+    "jest-emotion": "^10.0.0",
     "jest-serializer-vue": "^2.0.2",
     "markdown-toc": "^1.1.0",
     "poi": "^10.0.0-beta.8",
@@ -78,8 +78,8 @@
       "vue"
     ],
     "snapshotSerializers": [
-      "jest-serializer-vue",
-      "jest-emotion/serializer"
+      "jest-emotion",
+      "jest-serializer-vue"
     ],
     "testPathIgnorePatterns": [
       "/node_modules/"

@@ -6062,14 +6062,15 @@ jest-each@^23.6.0:
     chalk "^2.0.1"
     pretty-format "^23.6.0"
 
-jest-emotion@^9.2.11:
-  version "9.2.11"
-  resolved "https://registry.yarnpkg.com/jest-emotion/-/jest-emotion-9.2.11.tgz#de1e5974f1a6e636fa87c631dd58f988ed8311f9"
-  integrity sha512-+u7I9lQg14LIW0g4i6D5ez+AUJks1K1P76e38hfbnv0uPph2z5yjN150BSsMQxHuoZZB1fKZmtEdrRPIqlUkGg==
+jest-emotion@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/jest-emotion/-/jest-emotion-10.0.0.tgz#57024dc9c6af5ac7c58ba41fa3a93d5a343239fc"
+  integrity sha512-+0PvuI240atj9K+RT1y6l0cL4poDCZyqOWiuBv640R5Bgr40XnNk9LNZfc/gYipyIJ+0gXqRAUlPeh7D19f5NQ==
   dependencies:
     "@types/jest" "^23.0.2"
     chalk "^2.4.1"
     css "^2.2.1"
+    object-assign "^4.1.1"
 
 jest-environment-jsdom@^23.4.0:
   version "23.4.0"

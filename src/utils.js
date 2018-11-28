@@ -1,7 +1,9 @@
 import isPropValid from '@emotion/is-prop-valid'
 
 const testOmitPropsOnStringTag = isPropValid
-const testOmitPropsOnComponent = key => key !== 'theme' && key !== 'ref'
+const testOmitPropsOnComponent = key => {
+  return key !== 'theme' && key !== 'ref'
+}
 
 export const getDefaultShouldForwardProp = tag =>
   typeof tag === 'string' &&

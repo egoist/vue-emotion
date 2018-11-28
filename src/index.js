@@ -56,6 +56,7 @@ export default function createStyled(tag, options) {
     if (identifierName !== undefined) {
       styles.push(`label:${identifierName};`)
     }
+
     if (args[0] == null || args[0].raw === undefined) {
       styles.push.apply(styles, args)
     } else {
@@ -74,25 +75,22 @@ export default function createStyled(tag, options) {
 
     const Styled = {
       name: displayName,
-      functional: true,
       inject: { theme: { default: null } },
-      render(createElement, { props, injections, data, children }) {
-        const { theme } = injections
+      props: options.props || {},
+      inheritAttrs: false,
+      render(createElement) {
+        const props = { ...this.$attrs, ...this.$props }
         const finalTag = (shouldUseAs && props.as) || baseTag
 
         let className = ''
         let classInterpolations = []
-        let mergedProps = props
 
-        if (props.theme == null) {
-          mergedProps = {}
-          for (let key in props) {
-            mergedProps[key] = props[key]
-          }
-          mergedProps.theme = theme
+        let mergedProps = props
+        for (let key in props) {
+          mergedProps[key] = this[key] || this.$attrs[key]
         }
 
-        const existingClasses = stringifyClass(data.class)
+        const existingClasses = stringifyClass(props.class)
 
         if (existingClasses) {
           className += getRegisteredStyles(
@@ -136,9 +134,13 @@ export default function createStyled(tag, options) {
         }
 
         // https://vuejs.org/v2/guide/render-function.html#createElement-Arguments
-        const newData = { ...data, class: className }
+        const newData = {
+          props: newProps,
+          class: className,
+          on: this.$listeners
+        }
 
-        return createElement(finalTag, newData, children)
+        return createElement(finalTag, newData, this.$scopedSlots.default)
       }
     }
 
