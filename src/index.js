@@ -25,9 +25,11 @@ export default function createStyled(tag, options) {
   let identifierName
   let shouldForwardProp
   let targetClassName
+  let props
   if (options !== undefined) {
     identifierName = options.label
     targetClassName = options.target
+    props = options.props
     shouldForwardProp =
       tag.__emotion_forwardProp && options.shouldForwardProp
         ? propName =>
@@ -76,7 +78,7 @@ export default function createStyled(tag, options) {
     const Styled = {
       name: displayName,
       inject: { theme: { default: null } },
-      props: options.props || {},
+      props: props || {},
       inheritAttrs: false,
       render(createElement) {
         const props = { ...this.$attrs, ...this.$props }
