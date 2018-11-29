@@ -123,6 +123,7 @@ export default function createStyled(tag, options) {
 
         // https://vuejs.org/v2/guide/render-function.html#createElement-Arguments
         const newData = {
+          ...this.$data,
           props: newProps,
           class: className,
           on: this.$listeners
