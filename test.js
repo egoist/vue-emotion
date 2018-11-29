@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import styled from './src'
+import styled, { css } from './src'
 
 const props = {
   display: {
@@ -16,10 +16,18 @@ const props = {
   }
 }
 
+const displayStyles = ({ display }) => css`
+  display: ${display};
+`
+
+const paddingStyles = ({ padding }) => css`
+  padding: ${padding};
+`
+
 const StyledBox = styled('div', { props })`
   text-align: center;
-  display: ${props => props.display};
-  padding: ${props => props.padding};
+  ${displayStyles};
+  ${paddingStyles};
   color: ${props => (props.valid ? 'green' : 'red')};
   background-color: ${props => (props.theme === 'light' ? 'white' : 'blue')};
 `

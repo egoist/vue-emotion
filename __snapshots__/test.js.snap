@@ -10,7 +10,7 @@ exports[`"as" attribute should work as expected 1`] = `
 }
 
 <section
-  class="emotion-0 emotion-1"
+  class="emotion-0"
 />
 `;
 
@@ -27,7 +27,7 @@ exports[`it should apply styles to a component with custom classes and props 1`]
 }
 
 <div
-  class="testing emotion-0 emotion-1"
+  class="testing emotion-0"
 />
 `;
 
@@ -41,7 +41,7 @@ exports[`theme injection should work as expected 1`] = `
 }
 
 <div
-  class="emotion-0 emotion-1"
+  class="emotion-0"
 />
 `;
 

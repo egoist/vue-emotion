@@ -32,9 +32,9 @@
     "@vue/test-utils": "^1.0.0-beta.25",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
-    "babel-plugin-emotion": "^9.1.0",
+    "babel-plugin-emotion": "^10.0.0",
     "bili": "^3.0.13",
-    "emotion": "^9.1.0",
+    "emotion": "^10.0.0",
     "eslint-config-rem": "^3.0.0",
     "jest": "^23.6.0",
     "jest-emotion": "^10.0.0",
@@ -59,12 +59,11 @@
     }
   },
   "peerDependencies": {
-    "emotion": "^9.0.0"
+    "emotion": "^10.0.0"
   },
   "dependencies": {
     "@emotion/cache": "^10.0.0-beta.13",
     "@emotion/is-prop-valid": "^0.7.1",
-    "@emotion/serialize": "^0.11.0",
     "@emotion/utils": "^0.11.1",
     "nano-assign": "^1.0.0"
   },

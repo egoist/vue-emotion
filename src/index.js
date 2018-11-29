@@ -1,9 +1,6 @@
-import { getRegisteredStyles, insertStyles } from '@emotion/utils'
-import createCache from '@emotion/cache'
-import { serializeStyles } from '@emotion/serialize'
+import { css, cache } from 'emotion'
+import { getRegisteredStyles } from '@emotion/utils'
 import { getDefaultShouldForwardProp } from './utils'
-
-const cache = createCache()
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
@@ -102,19 +99,8 @@ export default function createStyled(tag, options) {
           )
         }
 
-        const serialized = serializeStyles(
-          styles.concat(classInterpolations),
-          cache.registered,
-          mergedProps
-        )
-
-        const rules = insertStyles(
-          cache,
-          serialized,
-          typeof finalTag === 'string'
-        )
-
-        className += `${cache.key}-${serialized.name}`
+        const context = { mergedProps }
+        className += css.apply(context, styles.concat(classInterpolations))
 
         if (targetClassName !== undefined) {
           className += ` ${targetClassName}`
@@ -142,7 +128,7 @@ export default function createStyled(tag, options) {
           on: this.$listeners
         }
 
-        return createElement(finalTag, newData, this.$scopedSlots.default)
+        return createElement(finalTag, newData, this.$slots.default)
       }
     }
 
@@ -152,6 +138,7 @@ export default function createStyled(tag, options) {
     Styled.__emotion_forwardProp = shouldForwardProp
 
     Object.defineProperty(Styled, 'toString', {
+      enumerable: false,
       value() {
         if (
           targetClassName === undefined &&
