@@ -75,21 +75,23 @@ export default function createStyled(tag, options) {
     const Styled = {
       name: displayName,
       inject: { theme: { default: null } },
-      props: props || {},
-      inheritAttrs: false,
-      render(createElement) {
-        const props = { ...this.$attrs, ...this.$props }
-        const finalTag = (shouldUseAs && props.as) || baseTag
+      functional: true,
+      props,
+      render(createElement, { props, data, children, injections }) {
+        const { attrs = {} } = data
+        const finalTag = attrs.as || baseTag
 
         let className = ''
         let classInterpolations = []
 
         let mergedProps = props
         for (let key in props) {
-          mergedProps[key] = this[key] || this.$attrs[key]
+          mergedProps[key] = props[key]
         }
 
-        const existingClasses = stringifyClass(props.class)
+        mergedProps.theme = attrs.theme || injections.theme
+
+        const existingClasses = stringifyClass(data.class)
 
         if (existingClasses) {
           className += getRegisteredStyles(
@@ -114,22 +116,30 @@ export default function createStyled(tag, options) {
         let newProps = {}
 
         for (let key in props) {
-          if (shouldUseAs && key === 'as') continue
+          if (key === 'as') continue
 
           if (finalShouldForwardProp(key)) {
             newProps[key] = props[key]
           }
         }
 
-        // https://vuejs.org/v2/guide/render-function.html#createElement-Arguments
-        const newData = {
-          ...this.$data,
-          props: newProps,
-          class: className,
-          on: this.$listeners
+        let newAttrs = {}
+
+        for (let key in attrs) {
+          if (key in props) continue
+          if (key === 'as' || key === 'theme') continue
+          newAttrs[key] = attrs[key]
         }
 
-        return createElement(finalTag, newData, this.$slots.default)
+        // https://vuejs.org/v2/guide/render-function.html#createElement-Arguments
+        const newData = {
+          ...data,
+          attrs: newAttrs,
+          props: newProps,
+          class: className
+        }
+
+        return createElement(finalTag, newData, children)
       }
     }
 

@@ -34,17 +34,20 @@ const StyledBox = styled('div', { props })`
 
 const Box = {
   name: 'Box',
-  extends: StyledBox
+  render() {
+    return (
+      <StyledBox {...{ props: this.$props, attrs: this.$attrs }}>
+        Hello
+      </StyledBox>
+    )
+  }
 }
 
 test('it should apply styles to a component with custom classes and props', () => {
   const wrapper = mount(Box, {
     attrs: {
-      class: 'testing'
-    },
-    propsData: {
       display: 'flex',
-      padding: '4rem'
+      as: 'main'
     }
   })
   expect(wrapper.element).toMatchSnapshot()
@@ -52,7 +55,7 @@ test('it should apply styles to a component with custom classes and props', () =
 
 test('"as" attribute should work as expected', () => {
   const wrapper = mount(Box, {
-    propsData: {
+    attrs: {
       as: 'section'
     }
   })
@@ -66,7 +69,7 @@ test('withComponent should work as expected', () => {
 
 test('theme injection should work as expected', () => {
   const wrapper = mount(Box, {
-    propsData: {
+    provide: {
       theme: 'light'
     }
   })
@@ -74,24 +77,12 @@ test('theme injection should work as expected', () => {
   expect(wrapper.element).toMatchSnapshot()
 })
 
-// const StyledFlex = styled(Box)`
-//   display: flex;
-//   color: black;
-// `
+test('can set the theme via an attribute', () => {
+  const wrapper = mount(Box, {
+    attrs: {
+      theme: 'light'
+    }
+  })
 
-// const Flex = {
-//   name: 'Flex',
-//   props,
-//   render() {
-//     return <StyledFlex>Hello</StyledFlex>
-//   }
-// }
-
-// test('it should be able to overrides styles of a component', () => {
-//   const wrapper = mount(Flex, {
-//     propsData: {
-//       padding: '20px'
-//     }
-//   })
-//   expect(wrapper.element).toMatchSnapshot()
-// })
+  expect(wrapper.element).toMatchSnapshot()
+})

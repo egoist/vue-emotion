@@ -14,6 +14,7 @@
     "dist"
   ],
   "scripts": {
+    "serve": "vue-cli-service serve",
     "test": "npm run lint && echo 'no tests!'",
     "lint": "xo",
     "prepublishOnly": "npm run build",
@@ -65,6 +66,7 @@
     "@emotion/cache": "^10.0.0-beta.13",
     "@emotion/is-prop-valid": "^0.7.1",
     "@emotion/utils": "^0.11.1",
+    "@vue/cli-service": "^3.2.0",
     "nano-assign": "^1.0.0"
   },
   "jest": {
