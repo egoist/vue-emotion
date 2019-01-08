@@ -850,25 +850,15 @@
     "@emotion/utils" "0.11.1"
     "@emotion/weak-memoize" "0.2.2"
 
-"@emotion/cache@^10.0.0-beta.13":
-  version "10.0.0-beta.13"
-  resolved "https://registry.yarnpkg.com/@emotion/cache/-/cache-10.0.0-beta.13.tgz#0ddf86b93bf3ef49f8043660204c7e09084a994e"
-  integrity sha512-gVYuef+06gyTYaH+pKlIbaAkfhyjjrYDrHIjAylV0pFOKWGx0vtjMgLTgIdis3U3zmDRicNzDiQE7nM/2vW19A==
-  dependencies:
-    "@emotion/sheet" "0.9.2"
-    "@emotion/stylis" "0.8.3"
-    "@emotion/utils" "0.11.1"
-    "@emotion/weak-memoize" "0.2.2"
-
 "@emotion/hash@0.7.1":
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/@emotion/hash/-/hash-0.7.1.tgz#9833722341379fb7d67f06a4b00ab3c37913da53"
   integrity sha512-OYpa/Sg+2GDX+jibUfpZVn1YqSVRpYmTLF2eyAfrFTIJSbwyIrc+YscayoykvaOME/wV4BV0Sa0yqdMrgse6mA==
 
-"@emotion/is-prop-valid@^0.7.1":
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/@emotion/is-prop-valid/-/is-prop-valid-0.7.1.tgz#f822adf68b64b63e6cf1a41c2beee803fc576c3b"
-  integrity sha512-2p7VxoA7V8chp3NX+B9IdB5GEiZJyzJmAjudqdFZzmeZyk73sLeqvy6nItrzsRvbteYj7KsAybrP5l3x1vGprA==
+"@emotion/is-prop-valid@0.7.3":
+  version "0.7.3"
+  resolved "https://registry.yarnpkg.com/@emotion/is-prop-valid/-/is-prop-valid-0.7.3.tgz#a6bf4fa5387cbba59d44e698a4680f481a8da6cc"
+  integrity sha512-uxJqm/sqwXw3YPA5GXX365OBcJGFtxUVkB6WyezqFHlNe9jqUWH5ur2O2M8dGBz61kn1g3ZBlzUunFQXQIClhA==
   dependencies:
     "@emotion/memoize" "0.7.1"
 
@@ -903,7 +893,7 @@
   resolved "https://registry.yarnpkg.com/@emotion/unitless/-/unitless-0.7.3.tgz#6310a047f12d21a1036fb031317219892440416f"
   integrity sha512-4zAPlpDEh2VwXswwr/t8xGNDGg8RQiPxtxZ3qQEXyQsBV39ptTdESCjuBvGze1nLMVrxmTIKmnO/nAV8Tqjjzg==
 
-"@emotion/utils@0.11.1", "@emotion/utils@^0.11.1":
+"@emotion/utils@0.11.1":
   version "0.11.1"
   resolved "https://registry.yarnpkg.com/@emotion/utils/-/utils-0.11.1.tgz#8529b7412a6eb4b48bdf6e720cc1b8e6e1e17628"
   integrity sha512-8M3VN0hetwhsJ8dH8VkVy7xo5/1VoBsDOk/T4SJOeXwTO1c4uIqVNx2qyecLFnnUWD5vvUqHQ1gASSeUN6zcTg==
@@ -6648,9 +6638,9 @@ jest-each@^23.6.0:
     pretty-format "^23.6.0"
 
 jest-emotion@^10.0.0:
-  version "10.0.0"
-  resolved "https://registry.yarnpkg.com/jest-emotion/-/jest-emotion-10.0.0.tgz#57024dc9c6af5ac7c58ba41fa3a93d5a343239fc"
-  integrity sha512-+0PvuI240atj9K+RT1y6l0cL4poDCZyqOWiuBv640R5Bgr40XnNk9LNZfc/gYipyIJ+0gXqRAUlPeh7D19f5NQ==
+  version "10.0.6"
+  resolved "https://registry.yarnpkg.com/jest-emotion/-/jest-emotion-10.0.6.tgz#6a49b82984b098c284347497f56eca3be22a4c34"
+  integrity sha512-2JC3tm6l9MmBi1QIn6uUAUP6BEkseD4eY9raVoU7feT9aebsO2UWLY6gFDArDhH7ptSWiYZKZiC2WTT1k7JNew==
   dependencies:
     "@types/jest" "^23.0.2"
     chalk "^2.4.1"

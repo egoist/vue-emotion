@@ -43,6 +43,11 @@ const Box = {
   }
 }
 
+const Panel = styled(Box)`
+  background-color: white;
+  display: flex;
+`
+
 test('it should apply styles to a component with custom classes and props', () => {
   const wrapper = mount(Box, {
     attrs: {
@@ -50,6 +55,11 @@ test('it should apply styles to a component with custom classes and props', () =
       as: 'main'
     }
   })
+  expect(wrapper.element).toMatchSnapshot()
+})
+
+test('it should override styles', () => {
+  const wrapper = mount(Panel)
   expect(wrapper.element).toMatchSnapshot()
 })
 

@@ -9,12 +9,12 @@ exports[`"as" attribute should work as expected 1`] = `
   background-color: blue;
 }
 
-<div
+<section
   as="section"
   class="emotion-0"
 >
   Hello
-</div>
+</section>
 `;
 
 exports[`can set the theme via an attribute 1`] = `
@@ -46,9 +46,33 @@ exports[`it should apply styles to a component with custom classes and props 1`]
   background-color: blue;
 }
 
-<div
+<main
   as="main"
   class="emotion-0"
+>
+  Hello
+</main>
+`;
+
+exports[`it should override styles 1`] = `
+.emotion-1 {
+  background-color: white;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.emotion-0 {
+  text-align: center;
+  display: block;
+  padding: 10px;
+  color: red;
+  background-color: blue;
+}
+
+<div
+  class="emotion-0 emotion-1"
 >
   Hello
 </div>

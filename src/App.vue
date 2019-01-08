@@ -3,7 +3,9 @@
     <StyledDiv tabindex="0" title="Testing">Hello World</StyledDiv>
     <StyledDiv display="inline-block" as="span">Hello World</StyledDiv>
     <StyledMain>Hello</StyledMain>
-    <OverrideStyles as="aside" display="flex">Hello World</OverrideStyles>
+    <OverrideStyles as="aside" display="flex">Hello World
+      <StyledDiv>Nested</StyledDiv>
+    </OverrideStyles>
   </div>
 </template>
 
@@ -18,6 +20,7 @@ const props = {
 };
 
 const StyledDiv = styled("div", { props })`
+  label: div;
   background-color: black;
   color: white;
   padding: 1em;
@@ -27,6 +30,7 @@ const StyledDiv = styled("div", { props })`
 const StyledMain = StyledDiv.withComponent("main");
 
 const OverrideStyles = styled(StyledDiv)`
+  label: override-div;
   background-color: red;
 `;
 
