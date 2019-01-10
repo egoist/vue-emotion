@@ -126,7 +126,6 @@ export default function createStyled(tag, options) {
         let newAttrs = {}
 
         for (let key in attrs) {
-          if (key in props) continue
           if (key === 'as' || key === 'theme') continue
           newAttrs[key] = attrs[key]
         }
