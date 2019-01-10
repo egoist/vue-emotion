@@ -65,4 +65,4 @@ Refer to https://github.com/tkh44/emotion for more docs.
 **vue-emotion** © [Sky Foundry](https://github.com/sky-foundry/vue-emotion), Released under the [MIT](./LICENSE) License.<br>
 Authored and maintained by Sky Foundry with help from contributors ([list](https://github.com/egoist/vue-emotion/contributors)).
 
-> [github.com/sky-foundry/vue-emotion](https://github.com/sky-foundry/vue-emotion) · GitHub [Website](https://skyfoundry.agency) · Website
+> [https://skyfoundry.agency](https://skyfoundry.agency) · Website [github.com/sky-foundry/vue-emotion](https://github.com/sky-foundry/vue-emotion) · GitHub 
