@@ -1,6 +1,6 @@
 # vue-emotion
 
-[![NPM version](https://img.shields.io/npm/v/vue-emotion.svg?style=flat)](https://npmjs.com/package/vue-emotion) [![NPM downloads](https://img.shields.io/npm/dm/vue-emotion.svg?style=flat)](https://npmjs.com/package/vue-emotion) [![CircleCI](https://circleci.com/gh/egoist/vue-emotion/tree/master.svg?style=shield)](https://circleci.com/gh/egoist/vue-emotion/tree/master)  [![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&style=flat)](https://github.com/egoist/donate)
+[![NPM version](https://img.shields.io/npm/v/vue-emotion.svg?style=flat)](https://npmjs.com/package/vue-emotion) [![NPM downloads](https://img.shields.io/npm/dm/vue-emotion.svg?style=flat)](https://npmjs.com/package/vue-emotion) [![CircleCI](https://circleci.com/gh/egoist/vue-emotion/tree/master.svg?style=shield)](https://circleci.com/gh/egoist/vue-emotion/tree/master)
 
 *[emotion](https://github.com/tkh44/emotion) is the Next Generation of CSS-in-JS.*
 
@@ -62,7 +62,7 @@ Refer to https://github.com/tkh44/emotion for more docs.
 
 ## Author
 
-**vue-emotion** © [EGOIST](https://github.com/egoist), Released under the [MIT](./LICENSE) License.<br>
-Authored and maintained by EGOIST with help from contributors ([list](https://github.com/egoist/vue-emotion/contributors)).
+**vue-emotion** © [Sky Foundry](https://github.com/sky-foundry/vue-emotion), Released under the [MIT](./LICENSE) License.<br>
+Authored and maintained by Sky Foundry with help from contributors ([list](https://github.com/egoist/vue-emotion/contributors)).
 
-> [github.com/egoist](https://github.com/egoist) · GitHub [@EGOIST](https://github.com/egoist) · Twitter [@_egoistlily](https://twitter.com/_egoistlily)
+> [https://skyfoundry.agency](https://skyfoundry.agency) · Website [github.com/sky-foundry/vue-emotion](https://github.com/sky-foundry/vue-emotion) · GitHub 
