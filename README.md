@@ -1,6 +1,6 @@
 # vue-emotion
 
-[![NPM version](https://img.shields.io/npm/v/vue-emotion.svg?style=flat)](https://npmjs.com/package/vue-emotion) [![NPM downloads](https://img.shields.io/npm/dm/vue-emotion.svg?style=flat)](https://npmjs.com/package/vue-emotion) [![CircleCI](https://circleci.com/gh/egoist/vue-emotion/tree/master.svg?style=shield)](https://circleci.com/gh/egoist/vue-emotion/tree/master)  [![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&style=flat)](https://github.com/egoist/donate)
+[![NPM version](https://img.shields.io/npm/v/vue-emotion.svg?style=flat)](https://npmjs.com/package/vue-emotion) [![NPM downloads](https://img.shields.io/npm/dm/vue-emotion.svg?style=flat)](https://npmjs.com/package/vue-emotion) [![CircleCI](https://circleci.com/gh/egoist/vue-emotion/tree/master.svg?style=shield)](https://circleci.com/gh/egoist/vue-emotion/tree/master)
 
 *[emotion](https://github.com/tkh44/emotion) is the Next Generation of CSS-in-JS.*
 
