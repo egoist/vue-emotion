@@ -62,7 +62,7 @@ Refer to https://github.com/tkh44/emotion for more docs.
 
 ## Author
 
-**vue-emotion** © [EGOIST](https://github.com/egoist), Released under the [MIT](./LICENSE) License.<br>
-Authored and maintained by EGOIST with help from contributors ([list](https://github.com/egoist/vue-emotion/contributors)).
+**vue-emotion** © [Sky Foundry](https://github.com/sky-foundry/vue-emotion), Released under the [MIT](./LICENSE) License.<br>
+Authored and maintained by Sky Foundry with help from contributors ([list](https://github.com/egoist/vue-emotion/contributors)).
 
-> [github.com/egoist](https://github.com/egoist) · GitHub [@EGOIST](https://github.com/egoist) · Twitter [@_egoistlily](https://twitter.com/_egoistlily)
+> [github.com/sky-foundry/vue-emotion](https://github.com/sky-foundry/vue-emotion) · GitHub [Website](https://skyfoundry.agency) · Website
