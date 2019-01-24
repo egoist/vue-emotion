@@ -1,6 +1,6 @@
 import isPropValid from '@emotion/is-prop-valid'
 
-const testOmitPropsOnStringTag = prop => true
+const testOmitPropsOnStringTag = prop => isPropValid(prop)
 const testOmitPropsOnComponent = key => {
   return key !== 'theme' && key !== 'ref'
 }

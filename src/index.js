@@ -115,15 +115,16 @@ export default function createStyled(tag, options) {
 
         let newProps = {}
 
+        let newAttrs = {}
+
         for (let key in props) {
           if (key === 'as') continue
 
           if (finalShouldForwardProp(key)) {
             newProps[key] = props[key]
+            newAttrs[key] = props[key]
           }
         }
-
-        let newAttrs = {}
 
         for (let key in attrs) {
           if (key === 'as' || key === 'theme') continue
