@@ -69,7 +69,7 @@ export default function createStyled(tag, options) {
 
     const displayName = `Styled${tag.name ||
       identifierName ||
-      capitalizeFirstLetter(tag) ||
+      (typeof tag === 'string' && capitalizeFirstLetter(tag)) ||
       'Component'}`
 
     const Styled = {
