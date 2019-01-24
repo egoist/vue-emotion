@@ -114,8 +114,8 @@ export default function createStyled(tag, options) {
             : defaultShouldForwardProp
 
         let newProps = {}
-
         let newAttrs = {}
+        let newDomProps = {}
 
         for (let key in props) {
           if (key === 'as') continue
@@ -128,7 +128,12 @@ export default function createStyled(tag, options) {
 
         for (let key in attrs) {
           if (key === 'as' || key === 'theme') continue
+
           newAttrs[key] = attrs[key]
+
+          if (key === 'value') {
+            newDomProps[key] = attrs[key]
+          }
         }
 
         // https://vuejs.org/v2/guide/render-function.html#createElement-Arguments
@@ -136,6 +141,7 @@ export default function createStyled(tag, options) {
           ...data,
           attrs: newAttrs,
           props: newProps,
+          domProps: newDomProps,
           class: className
         }
 
