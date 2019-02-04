@@ -47,7 +47,7 @@ export default function createStyled(tag, options) {
   const shouldUseAs = !defaultShouldForwardProp('as')
 
   return (...args) => {
-    let styles =
+    const styles =
       isReal && tag.__emotion_styles !== undefined
         ? tag.__emotion_styles.slice(0)
         : []
@@ -129,11 +129,13 @@ export default function createStyled(tag, options) {
         for (let key in attrs) {
           if (key === 'as' || key === 'theme') continue
 
-          newAttrs[key] = attrs[key]
-
           if (key === 'value') {
             newDomProps[key] = attrs[key]
+          } else {
+            newAttrs[key] = attrs[key]
           }
+
+
         }
 
         // https://vuejs.org/v2/guide/render-function.html#createElement-Arguments

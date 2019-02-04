@@ -1,6 +1,6 @@
 {
   "name": "@sky-foundry/vue-emotion",
-  "version": "0.4.24",
+  "version": "0.4.25",
   "description": "Seamlessly use emotion (CSS-in-JS) with Vue.js",
   "repository": {
     "url": "sky-foundry/vue-emotion",
