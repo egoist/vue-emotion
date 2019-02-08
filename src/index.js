@@ -26,7 +26,10 @@ export default function createStyled(tag, options) {
   if (options !== undefined) {
     identifierName = options.label
     targetClassName = options.target
-    props = options.props
+    props = {
+      ...tag.props || {},
+      ...options.props || {},
+    }
     shouldForwardProp =
       tag.__emotion_forwardProp && options.shouldForwardProp
         ? propName =>
@@ -42,7 +45,7 @@ export default function createStyled(tag, options) {
     shouldForwardProp = tag.__emotion_forwardProp
   }
 
-  let defaultShouldForwardProp =
+  const defaultShouldForwardProp =
     shouldForwardProp || getDefaultShouldForwardProp(baseTag)
   const shouldUseAs = !defaultShouldForwardProp('as')
 
@@ -85,7 +88,7 @@ export default function createStyled(tag, options) {
         let classInterpolations = []
 
         let mergedProps = props
-        for (let key in props) {
+        for (const key in props) {
           mergedProps[key] = props[key]
         }
 
@@ -113,11 +116,11 @@ export default function createStyled(tag, options) {
             ? getDefaultShouldForwardProp(finalTag)
             : defaultShouldForwardProp
 
-        let newProps = {}
-        let newAttrs = {}
-        let newDomProps = {}
+        const newProps = {}
+        const newAttrs = {}
+        const newDomProps = {}
 
-        for (let key in props) {
+        for (const key in props) {
           if (key === 'as') continue
 
           if (finalShouldForwardProp(key)) {
@@ -126,7 +129,7 @@ export default function createStyled(tag, options) {
           }
         }
 
-        for (let key in attrs) {
+        for (const key in attrs) {
           if (key === 'as' || key === 'theme') continue
 
           if (key === 'value') {
@@ -134,8 +137,6 @@ export default function createStyled(tag, options) {
           } else {
             newAttrs[key] = attrs[key]
           }
-
-
         }
 
         // https://vuejs.org/v2/guide/render-function.html#createElement-Arguments
