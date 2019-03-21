@@ -1,6 +1,6 @@
 {
   "name": "vue-emotion",
-  "version": "0.4.28",
+  "version": "0.4.29",
   "description": "Seamlessly use emotion (CSS-in-JS) with Vue.js",
   "repository": {
     "url": "sky-foundry/vue-emotion",
@@ -59,14 +59,12 @@
       "camelcase": 0
     }
   },
-  "peerDependencies": {
-    "emotion": "^10.0.0"
-  },
   "dependencies": {
     "@emotion/cache": "10.0.0",
     "@emotion/is-prop-valid": "0.7.3",
     "@emotion/utils": "0.11.1",
     "@vue/cli-service": "^3.2.0",
+    "emotion": "^10.0.0",
     "nano-assign": "^1.0.0"
   },
   "jest": {
