@@ -2,7 +2,7 @@
 
 [![NPM version](https://img.shields.io/npm/v/vue-emotion.svg?style=flat)](https://npmjs.com/package/vue-emotion) [![NPM downloads](https://img.shields.io/npm/dm/vue-emotion.svg?style=flat)](https://npmjs.com/package/vue-emotion)
 
-*[emotion](https://github.com/tkh44/emotion) is the Next Generation of CSS-in-JS.*
+*[Emotion](https://emotion.sh/docs) is the Next Generation of CSS-in-JS.*
 
 ## Install
 
@@ -48,7 +48,7 @@ new Vue({
 })
 ```
 
-Refer to https://github.com/tkh44/emotion for more docs.
+Refer to https://emotion.sh/docs for more docs.
 
 
 ## Contributing
@@ -63,6 +63,6 @@ Refer to https://github.com/tkh44/emotion for more docs.
 ## Author
 
 **vue-emotion** © [Sky Foundry](https://github.com/sky-foundry/vue-emotion), Released under the [MIT](./LICENSE) License.<br>
-Authored and maintained by Sky Foundry with help from contributors ([list](https://github.com/egoist/vue-emotion/contributors)).
+Authored and maintained by Sky Foundry with help from [contributors](https://github.com/sky-foundry/vue-emotion/contributors).
 
 > [https://skyfoundry.agency](https://skyfoundry.agency) · Website [github.com/sky-foundry/vue-emotion](https://github.com/sky-foundry/vue-emotion) · GitHub 
