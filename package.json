@@ -55,6 +55,7 @@
     "lint-staged": "^9.4.0",
     "markdown-toc": "^1.2.0",
     "poi": "^12.7.2",
+    "saber": "^0.10.2",
     "vue": "^2.6.10",
     "vue-template-compiler": "^2.6.10",
     "xo": "^0.25.3"

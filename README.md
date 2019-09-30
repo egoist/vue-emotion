@@ -71,7 +71,7 @@ new Vue({
     }
   },
   render() {
-    const Button = styled.button`
+    const Button = styled('button')`
       color: ${props => (props.theme === 'dark' ? 'white' : 'black')};
     `
     return <Button>Hello</Button>

@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { styled } from 'vue-emotion'
+import { styled } from '@egoist/vue-emotion'
 
 const Button = styled('button')`
   color: ${props => props.theme.color};

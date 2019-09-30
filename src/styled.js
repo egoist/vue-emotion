@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { getRegisteredStyles, insertStyles } from '@emotion/utils'
 import { serializeStyles } from '@emotion/serialize'
-import { cache, IS_BROWSER } from './shared'
+import { getCache, IS_BROWSER } from './shared'
 
 const ILLEGAL_ESCAPE_SEQUENCE_ERROR =
   process.env.NODE_ENV === 'production' ?
@@ -58,9 +58,14 @@ const createStyled = (tag, options = {}) => {
     const Styled = {
       functional: true,
 
-      inject: ['theme'],
+      inject: {
+        theme: {
+          default: undefined
+        }
+      },
 
       render(h, { data, children, parent, props, injections }) {
+        const cache = getCache()
         const { as, value, ...restAttrs } = data.attrs || {}
 
         let className = data.staticClass ? `${data.staticClass} ` : ''
@@ -109,7 +114,7 @@ const createStyled = (tag, options = {}) => {
           },
           children
         )
-
+console.log(IS_BROWSER, rules)
         if (!IS_BROWSER && rules !== undefined) {
           let serializedNames = serialized.name
           let { next } = serialized

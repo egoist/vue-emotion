@@ -1,7 +1,7 @@
 import { StyleSheet } from '@emotion/sheet'
 import { serializeStyles } from '@emotion/serialize'
 import { insertStyles } from '@emotion/utils'
-import { cache, IS_BROWSER } from './shared'
+import { getCache, IS_BROWSER } from './shared'
 
 export const Global = {
   props: {
@@ -15,6 +15,7 @@ export const Global = {
   },
 
   created() {
+    this.cache = getCache()
     this.init()
 
     if (this.watchStyles) {
@@ -36,19 +37,19 @@ export const Global = {
 
   mounted() {
     this.sheet = new StyleSheet({
-      key: `${cache.key}-global`,
-      nonce: cache.sheet.nonce,
-      container: cache.sheet.container
+      key: `${this.cache.key}-global`,
+      nonce: this.cache.sheet.nonce,
+      container: this.cache.sheet.container
     })
     const node = document.querySelector(
-      `style[data-emotion-${cache.key}="${this.serialized.name}"]`
+      `style[data-emotion-${this.cache.key}="${this.serialized.name}"]`
     )
     if (node !== null) {
       this.sheet.tags.push(node)
     }
 
-    if (cache.sheet.tags.length > 0) {
-      this.sheet.before = cache.sheet.tags[0]
+    if (this.cache.sheet.tags.length > 0) {
+      this.sheet.before = this.cache.sheet.tags[0]
     }
 
     this.insertStyles()
@@ -82,7 +83,7 @@ export const Global = {
         this.sheet.flush()
       }
 
-      cache.insert('', this.serialized, this.sheet, false)
+      this.cache.insert('', this.serialized, this.sheet, false)
     }
   },
 
@@ -99,9 +100,9 @@ export const Global = {
         next = next.next
       }
 
-      const shouldCache = cache.compat === true
+      const shouldCache = this.cache.compat === true
 
-      const rules = cache.insert(
+      const rules = this.cache.insert(
         '',
         { name: serializedNames, styles: serializedStyles },
         this.sheet,
@@ -111,9 +112,9 @@ export const Global = {
       if (!shouldCache) {
         return h('style', {
           domProps: {
-            [`data-emotion-${cache.key}`]: serializedNames,
+            [`data-emotion-${this.cache.key}`]: serializedNames,
             innerHTML: rules,
-            nonce: cache.sheet.nonce
+            nonce: this.cache.sheet.nonce
           }
         })
       }

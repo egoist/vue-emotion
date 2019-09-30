@@ -6,6 +6,6 @@ module.exports = {
     dir: 'example/dist'
   },
   chainWebpack(config) {
-    config.resolve.alias.set('vue-emotion$', path.resolve('src/index.js'))
+    config.resolve.alias.set('@egoist/vue-emotion$', path.resolve('src/index.js'))
   }
 }
