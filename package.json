@@ -1,6 +1,6 @@
 {
   "name": "@egoist/vue-emotion",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "description": "Seamlessly use emotion (CSS-in-JS) with Vue.js",
   "publishConfig": {
     "access": "public"
@@ -26,11 +26,15 @@
   "author": "EGOIST <0x142857@gmail.com>",
   "license": "MIT",
   "xo": {
-    "extends": ["rem"],
+    "extends": [
+      "rem"
+    ],
     "ignores": [
       "**/example/**"
     ],
-    "envs": ["browser"],
+    "envs": [
+      "browser"
+    ],
     "rules": {
       "camelcase": "off"
     }
