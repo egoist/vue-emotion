@@ -9,6 +9,7 @@ export const getCache = () => {
     cache = cache || createCache()
     return cache
   }
+
   return createCache()
 }
 

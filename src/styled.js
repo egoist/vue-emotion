@@ -114,7 +114,7 @@ const createStyled = (tag, options = {}) => {
           },
           children
         )
-console.log(IS_BROWSER, rules)
+        console.log(IS_BROWSER, rules)
         if (!IS_BROWSER && rules !== undefined) {
           let serializedNames = serialized.name
           let { next } = serialized

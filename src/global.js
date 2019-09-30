@@ -73,7 +73,7 @@ export const Global = {
     insertStyles() {
       if (this.serialized.next !== undefined) {
         // insert keyframes
-        insertStyles(cache, this.serialized.next, true)
+        insertStyles(this.cache, this.serialized.next, true)
       }
 
       if (this.sheet.tags.length > 0) {
