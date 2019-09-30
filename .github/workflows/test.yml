@@ -3,7 +3,7 @@ name: Node CI
 on: [push, pull_request]
 
 jobs:
-  test: 
+  test:
     name: Test on node ${{ matrix.node_version }} and ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
 
@@ -25,6 +25,11 @@ jobs:
       env:
         CI: true
     - name: Release
+      uses: codfish/semantic-release-action@master
       env:
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
-      run: npx semantic-release
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+    - run: echo ${{ steps.semantic.outputs.release-version }}
+    - run: echo "$OUTPUTS"
+      env:
+        OUTPUTS: ${{ toJson(steps.semantic.outputs) }}
