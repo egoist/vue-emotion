@@ -1,15 +1,16 @@
 {
-  "name": "vue-emotion",
+  "name": "@egoist/vue-emotion",
   "version": "0.4.2",
   "description": "Seamlessly use emotion (CSS-in-JS) with Vue.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
-    "url": "EGOIST/vue-emotion",
+    "url": "egoist/vue-emotion",
     "type": "git"
   },
-  "module": "dist/vue-emotion.es.js",
-  "main": "dist/vue-emotion.cjs.js",
-  "cdn": "dist/vue-emotion.min.js",
-  "unpkg": "dist/vue-emotion.min.js",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
   "files": [
     "dist"
   ],
@@ -17,37 +18,52 @@
     "test": "npm run lint && echo 'no tests!'",
     "lint": "xo",
     "prepublishOnly": "npm run build",
-    "build": "bili --format umd,cjs,es,umd-min --module-name emotionVue",
-    "example": "poi",
-    "build:example": "poi build",
+    "build": "bili --format cjs,esm --minimal",
+    "example": "poi -s",
+    "build:example": "poi --prod",
     "toc": "markdown-toc -i README.md"
   },
   "author": "EGOIST <0x142857@gmail.com>",
   "license": "MIT",
-  "devDependencies": {
-    "babel-plugin-emotion": "^9.1.0",
-    "bili": "^3.0.13",
-    "emotion": "^9.1.0",
-    "eslint-config-rem": "^3.0.0",
-    "markdown-toc": "^1.1.0",
-    "poi": "^10.0.0-beta.8",
-    "react": "^15.6.1",
-    "xo": "^0.18.0"
-  },
   "xo": {
-    "extends": "rem/prettier",
+    "extends": ["rem"],
     "ignores": [
-      "example/**"
+      "**/example/**"
     ],
+    "envs": ["browser"],
     "rules": {
-      "camelcase": 0
+      "camelcase": "off"
     }
   },
-  "peerDependencies": {
-    "emotion": "^9.0.0"
-  },
   "dependencies": {
-    "emotion-utils": "^9.1.0",
-    "nano-assign": "^1.0.0"
+    "@emotion/cache": "^10.0.19",
+    "@emotion/css": "^10.0.14",
+    "@emotion/serialize": "^0.11.11",
+    "@emotion/sheet": "^0.9.3",
+    "@emotion/utils": "^0.11.2",
+    "clsx": "^1.0.4"
+  },
+  "devDependencies": {
+    "babel-plugin-emotion": "^10.0.19",
+    "bili": "^4.8.1",
+    "eslint-config-rem": "^4.0.0",
+    "husky": "^3.0.7",
+    "lint-staged": "^9.4.0",
+    "markdown-toc": "^1.2.0",
+    "poi": "^12.7.2",
+    "vue": "^2.6.10",
+    "vue-template-compiler": "^2.6.10",
+    "xo": "^0.25.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "README.md": [
+      "yarn markdown-toc -i",
+      "git add"
+    ]
   }
 }

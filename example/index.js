@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import styled from 'vue-emotion'
+import { styled } from 'vue-emotion'
 
 const Button = styled('button')`
   color: ${props => props.theme.color};
@@ -12,16 +12,17 @@ const BlueButton = styled(Button)`
   background: yellow;
 `
 
-const Container = styled('div')`
-  ${BlueButton.toString()} {
-    color: orange;
-  }
+const Input = styled('input')`
+  border: 1px solid #e2e2e2;
+  padding: 10px;
+  font-size: 1rem;
 `
 
 new Vue({
   el: '#app',
   data: {
-    count: 0
+    count: 0,
+    initialInput: 'some text'
   },
   provide() {
     return {
@@ -32,10 +33,12 @@ new Vue({
   },
   render() {
     return (
-      <Container>
+      <div>
         <Button onClick={() => this.count++}>{this.count}</Button>
         <BlueButton onClick={() => this.count++}>{this.count}</BlueButton>
-      </Container>
+        <hr />
+        <Input value={this.initialInput} />
+      </div>
     )
   }
 })
