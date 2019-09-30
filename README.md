@@ -17,6 +17,7 @@ yarn add @egoist/vue-emotion
 - [Usage](#usage)
   * [Theming](#theming)
   * [Global styles](#global-styles)
+  * [Server-side rendering](#server-side-rendering)
 - [Caveats](#caveats)
   * [Component selector doesn't work](#component-selector-doesnt-work)
 - [Contributing](#contributing)
@@ -93,6 +94,10 @@ import { Global, css } from '@egoist/vue-emotion'
   `
 ]} />
 ```
+
+### Server-side rendering
+
+If you're using the `styled` and `Global` exports from this package, SSR will work out-of-the-box.
 
 ## Caveats
 
