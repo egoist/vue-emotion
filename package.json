@@ -23,6 +23,7 @@
     "prepublishOnly": "npm run build",
     "build": "bili src/index.js,src/server.js --format cjs,esm --minimal",
     "example": "poi -s",
+    "ssr-example": "saber ssr-example",
     "build:example": "poi --prod",
     "toc": "markdown-toc -i README.md"
   },
@@ -57,7 +58,7 @@
     "lint-staged": "^9.4.0",
     "markdown-toc": "^1.2.0",
     "poi": "^12.7.3",
-    "saber": "^0.10.2",
+    "saber": "^0.10.4",
     "vue": "^2.6.10",
     "vue-template-compiler": "^2.6.10",
     "xo": "^0.25.3"
