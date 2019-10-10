@@ -19,13 +19,21 @@ yarn add @egoist/vue-emotion
   * [Global styles](#global-styles)
   * [Server-side rendering](#server-side-rendering)
 - [Caveats](#caveats)
-  * [Component selector doesn't work](#component-selector-doesnt-work)
+  * [Component selector doesn't work (yet)](#component-selector-doesnt-work-yet)
 - [Contributing](#contributing)
 - [Author](#author)
 
 <!-- tocstop -->
 
 ## Usage
+
+Use the plugin:
+
+```js
+import { VueEmotion } from '@egoist/vue-emotion'
+
+Vue.use(VueEmotion)
+````
 
 Create your styled component:
 
@@ -37,7 +45,7 @@ const Button = styled('button')`
 `
 
 const PinkButton = styled(Button)`
-  color: pink;
+  color: hotpink;
 `
 
 new Vue({
@@ -83,25 +91,47 @@ I do know that `provide/inject` is NOT recommended in generic application code, 
 
 ### Global styles
 
-```js
-import { Global, css } from '@egoist/vue-emotion'
+```vue
+<template>
+  <div id="app">
+    <GlobalStyle />
+    <!-- rest of your app -->
+  </div>
+</template>
 
-<Global styles={[
-  css`
-    body {
-      margin: 0;
-    }
-  `
-]} />
+<script>
+import { createGlobalStyle } from '@egoist/vue-emotion'
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    background: red;
+  }
+`
+
+export default {
+  components: {
+    GlobalStyle
+  }
+}
+</script>
 ```
 
 ### Server-side rendering
 
-If you're using the `styled` and `Global` exports from this package, SSR will work out-of-the-box.
+You can extract critical CSS like this during server-side rendering:
+
+```js
+const { renderStyle } = require('@egoist/vue-emotion/server')
+
+// `cache` is the $emotionCache property on your Vue app instance
+// `html` is the rendered HTML by vue-server-renderer
+const style = renderStyle(cache, html)
+// <style>...</style>
+````
 
 ## Caveats
 
-### Component selector doesn't work
+### Component selector doesn't work (yet)
 
 ```js
 const Container = styled.div`
@@ -110,8 +140,6 @@ const Container = styled.div`
   }
 `
 ```
-
-Component selector (as seen above) requires `babel-plugin-emotion` which only works for React.
 
 ## Contributing
 

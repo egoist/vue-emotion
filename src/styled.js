@@ -1,12 +1,11 @@
 import clsx from 'clsx'
 import { getRegisteredStyles, insertStyles } from '@emotion/utils'
 import { serializeStyles } from '@emotion/serialize'
-import { getCache, IS_BROWSER } from './shared'
 
 const ILLEGAL_ESCAPE_SEQUENCE_ERROR =
-  process.env.NODE_ENV === 'production' ?
-    '' :
-    `You have illegal escape sequence in your template literal, most likely inside content's property value.
+  process.env.NODE_ENV === 'production'
+    ? ''
+    : `You have illegal escape sequence in your template literal, most likely inside content's property value.
 Because you write your CSS inside a JavaScript string you actually have to do double escaping, so for example "content: '\\00d7';" should become "content: '\\\\00d7';".
 You can read more about this here:
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#ES2018_revision_of_illegal_escape_sequences`
@@ -26,11 +25,11 @@ const createStyled = (tag, options = {}) => {
   const isReal = tag.__emotion_real === tag
   const baseTag = (isReal && tag.__emotion_base) || tag
 
-  return function (...args) {
+  return function(...args) {
     const styles =
-      isReal && tag.__emotion_styles !== undefined ?
-        tag.__emotion_styles.slice(0) :
-        []
+      isReal && tag.__emotion_styles !== undefined
+        ? tag.__emotion_styles.slice(0)
+        : []
 
     if (identifierName !== undefined) {
       styles.push(`label:${identifierName};`)
@@ -65,7 +64,7 @@ const createStyled = (tag, options = {}) => {
       },
 
       render(h, { data, children, parent, props, injections }) {
-        const cache = getCache()
+        const cache = parent.$emotionCache
         const { as, value, ...restAttrs } = data.attrs || {}
 
         let className = data.staticClass ? `${data.staticClass} ` : ''
@@ -103,7 +102,7 @@ const createStyled = (tag, options = {}) => {
           className += ` ${targetClassName}`
         }
 
-        const elem = h(
+        return h(
           finalTag,
           {
             ...data,
@@ -114,37 +113,15 @@ const createStyled = (tag, options = {}) => {
           },
           children
         )
-        console.log(IS_BROWSER, rules)
-        if (!IS_BROWSER && rules !== undefined) {
-          let serializedNames = serialized.name
-          let { next } = serialized
-          while (next !== undefined) {
-            serializedNames += ' ' + next.name
-            next = next.next
-          }
-
-          return [
-            h('style', {
-              domProps: {
-                [`data-emotion-${cache.key}`]: serializedNames,
-                innerHTML: rules,
-                nonce: cache.sheet.nonce
-              }
-            }),
-            elem
-          ]
-        }
-
-        return elem
       }
     }
 
     Styled.name =
-      identifierName === undefined ?
-        `Styled${
-          typeof baseTag === 'string' ? baseTag : baseTag.name || 'Component'
-        }` :
-        identifierName
+      identifierName === undefined
+        ? `Styled${
+            typeof baseTag === 'string' ? baseTag : baseTag.name || 'Component'
+          }`
+        : identifierName
 
     Styled.props = tag.props
     Styled.__emotion_real = Styled
@@ -167,9 +144,9 @@ const createStyled = (tag, options = {}) => {
     Styled.withComponent = (nextTag, nextOptions) => {
       return createStyled(
         nextTag,
-        nextOptions === undefined ?
-          options :
-          { ...(options || {}), ...nextOptions }
+        nextOptions === undefined
+          ? options
+          : { ...(options || {}), ...nextOptions }
       )(...styles)
     }
 

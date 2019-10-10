@@ -1,5 +1,7 @@
 import Vue from 'vue'
-import { styled } from '@egoist/vue-emotion'
+import { VueEmotion, styled } from '@egoist/vue-emotion'
+
+Vue.use(VueEmotion)
 
 const Button = styled('button')`
   color: ${props => props.theme.color};
@@ -35,7 +37,7 @@ new Vue({
     return (
       <div>
         <Button onClick={() => this.count++}>{this.count}</Button>
-        <BlueButton onClick={() => this.count++}>{this.count}</BlueButton>
+        <BlueButton onClick={() => this.count++}>{this.count * 2}</BlueButton>
         <hr />
         <Input value={this.initialInput} />
       </div>

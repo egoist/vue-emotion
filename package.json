@@ -18,7 +18,7 @@
     "test": "npm run lint && echo 'no tests!'",
     "lint": "xo",
     "prepublishOnly": "npm run build",
-    "build": "bili --format cjs,esm --minimal",
+    "build": "bili src/index.js,src/server.js --format cjs,esm --minimal",
     "example": "poi -s",
     "build:example": "poi --prod",
     "toc": "markdown-toc -i README.md"
@@ -41,11 +41,10 @@
   },
   "dependencies": {
     "@emotion/cache": "^10.0.19",
-    "@emotion/css": "^10.0.14",
     "@emotion/serialize": "^0.11.11",
-    "@emotion/sheet": "^0.9.3",
     "@emotion/utils": "^0.11.2",
-    "clsx": "^1.0.4"
+    "clsx": "^1.0.4",
+    "create-emotion-server": "^10.0.14"
   },
   "devDependencies": {
     "babel-plugin-emotion": "^10.0.19",
@@ -54,7 +53,7 @@
     "husky": "^3.0.7",
     "lint-staged": "^9.4.0",
     "markdown-toc": "^1.2.0",
-    "poi": "^12.7.2",
+    "poi": "^12.7.3",
     "saber": "^0.10.2",
     "vue": "^2.6.10",
     "vue-template-compiler": "^2.6.10",
