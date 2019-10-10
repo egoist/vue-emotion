@@ -3,9 +3,9 @@ import { getRegisteredStyles, insertStyles } from '@emotion/utils'
 import { serializeStyles } from '@emotion/serialize'
 
 const ILLEGAL_ESCAPE_SEQUENCE_ERROR =
-  process.env.NODE_ENV === 'production'
-    ? ''
-    : `You have illegal escape sequence in your template literal, most likely inside content's property value.
+  process.env.NODE_ENV === 'production' ?
+    '' :
+    `You have illegal escape sequence in your template literal, most likely inside content's property value.
 Because you write your CSS inside a JavaScript string you actually have to do double escaping, so for example "content: '\\00d7';" should become "content: '\\\\00d7';".
 You can read more about this here:
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#ES2018_revision_of_illegal_escape_sequences`
@@ -25,11 +25,11 @@ const createStyled = (tag, options = {}) => {
   const isReal = tag.__emotion_real === tag
   const baseTag = (isReal && tag.__emotion_base) || tag
 
-  return function(...args) {
+  return function (...args) {
     const styles =
-      isReal && tag.__emotion_styles !== undefined
-        ? tag.__emotion_styles.slice(0)
-        : []
+      isReal && tag.__emotion_styles !== undefined ?
+        tag.__emotion_styles.slice(0) :
+        []
 
     if (identifierName !== undefined) {
       styles.push(`label:${identifierName};`)
@@ -91,7 +91,7 @@ const createStyled = (tag, options = {}) => {
           mergedProps
         )
 
-        const rules = insertStyles(
+        insertStyles(
           cache,
           serialized,
           typeof finalTag === 'string'
@@ -117,11 +117,11 @@ const createStyled = (tag, options = {}) => {
     }
 
     Styled.name =
-      identifierName === undefined
-        ? `Styled${
-            typeof baseTag === 'string' ? baseTag : baseTag.name || 'Component'
-          }`
-        : identifierName
+      identifierName === undefined ?
+        `Styled${
+          typeof baseTag === 'string' ? baseTag : baseTag.name || 'Component'
+        }` :
+        identifierName
 
     Styled.props = tag.props
     Styled.__emotion_real = Styled
@@ -144,9 +144,9 @@ const createStyled = (tag, options = {}) => {
     Styled.withComponent = (nextTag, nextOptions) => {
       return createStyled(
         nextTag,
-        nextOptions === undefined
-          ? options
-          : { ...(options || {}), ...nextOptions }
+        nextOptions === undefined ?
+          options :
+          { ...(options || {}), ...nextOptions }
       )(...styles)
     }
 

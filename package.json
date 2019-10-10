@@ -12,7 +12,10 @@
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "files": [
-    "dist"
+    "dist/index.js",
+    "dist/index.esm.js",
+    "dist/server.js",
+    "/server.js"
   ],
   "scripts": {
     "test": "npm run lint && echo 'no tests!'",
@@ -67,6 +70,10 @@
   "lint-staged": {
     "README.md": [
       "yarn markdown-toc -i",
+      "git add"
+    ],
+    "src/*.js": [
+      "xo --fix",
       "git add"
     ]
   }

@@ -11,7 +11,7 @@ export const createGlobalStyle = (...styles) => ({
 
   render(_, { parent, data }) {
     const cache = parent.$emotionCache
-    const mergedProps = {...data.attrs, ...parent.$evergarden}
+    const mergedProps = { ...data.attrs, ...parent.$evergarden }
     const serialized = serializeStyles(styles, cache.registered, mergedProps)
     insertWithoutScoping(cache, serialized)
   }
