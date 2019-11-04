@@ -63,7 +63,7 @@ const createStyled = (tag, options = {}) => {
         }
       },
 
-      render(h, { data, children, parent, props, injections }) {
+      render(h, { data, children, parent, injections }) {
         const cache = parent.$emotionCache
         const { as, value, ...restAttrs } = data.attrs || {}
 
@@ -71,7 +71,7 @@ const createStyled = (tag, options = {}) => {
         const finalTag = as || baseTag
         const classInterpolations = []
         const mergedProps = {
-          ...props,
+          ...data.attrs,
           theme: injections.theme,
           ...parent.$evergarden
         }
@@ -123,7 +123,6 @@ const createStyled = (tag, options = {}) => {
         }` :
         identifierName
 
-    Styled.props = tag.props
     Styled.__emotion_real = Styled
     Styled.__emotion_base = baseTag
     Styled.__emotion_styles = styles
