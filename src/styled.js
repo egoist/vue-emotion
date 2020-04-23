@@ -75,9 +75,9 @@ const createStyled = (tag, options = {}) => {
           theme: injections.theme,
           ...parent.$evergarden
         }
-        const domProps = { 
+        const domProps = {
           value,
-	        ...data.domProps
+          ...data.domProps
         }
 
         if (data.class) {
