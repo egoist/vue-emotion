@@ -75,7 +75,10 @@ const createStyled = (tag, options = {}) => {
           theme: injections.theme,
           ...parent.$evergarden
         }
-        const domProps = { value }
+        const domProps = {
+          value,
+          ...data.domProps
+        }
 
         if (data.class) {
           className += getRegisteredStyles(
