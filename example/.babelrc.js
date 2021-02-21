@@ -3,6 +3,6 @@ module.exports = {
     ['poi/babel', { jsx: 'vue' }]
   ],
   plugins: [
-    'emotion'
+    '@emotion'
   ]
 }

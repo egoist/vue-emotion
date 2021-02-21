@@ -44,24 +44,24 @@
     }
   },
   "dependencies": {
-    "@emotion/cache": "^10.0.19",
-    "@emotion/serialize": "^0.11.11",
-    "@emotion/utils": "^0.11.2",
-    "clsx": "^1.0.4",
-    "create-emotion-server": "^10.0.14"
+    "@emotion/cache": "^11.1.3",
+    "@emotion/serialize": "^1.0.0",
+    "@emotion/utils": "^1.0.0",
+    "clsx": "^1.1.1",
+    "create-emotion-server": "^11.0.0"
   },
   "devDependencies": {
-    "babel-plugin-emotion": "^10.0.19",
-    "bili": "^4.8.1",
+    "@emotion/babel-plugin": "^11.2.0",
+    "bili": "^5.0.5",
     "eslint-config-rem": "^4.0.0",
-    "husky": "^3.0.7",
-    "lint-staged": "^9.4.0",
+    "husky": "^5.0.9",
+    "lint-staged": "^10.5.4",
     "markdown-toc": "^1.2.0",
-    "poi": "^12.7.3",
-    "saber": "^0.10.4",
-    "vue": "^2.6.10",
-    "vue-template-compiler": "^2.6.10",
-    "xo": "^0.25.3"
+    "poi": "^12.10.3",
+    "saber": "^0.11.7",
+    "vue": "^2.6.12",
+    "vue-template-compiler": "^2.6.12",
+    "xo": "^0.38.1"
   },
   "husky": {
     "hooks": {
