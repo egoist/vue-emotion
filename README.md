@@ -4,6 +4,7 @@
 
 _[emotion](https://github.com/tkh44/emotion) is the Next Generation of CSS-in-JS._
 
+Support For Vue3.
 ## Install
 
 ```bash
@@ -32,7 +33,15 @@ Use the plugin:
 ```js
 import { VueEmotion } from '@egoist/vue-emotion'
 
-Vue.use(VueEmotion)
+import { createApp } from 'vue'
+import App from './App.vue'
+import { VueEmotion } from '../../src/index'
+
+import './index.css'
+
+const app = createApp(App, { mixins: [VueEmotion] })
+
+app.mount('#app')
 ````
 
 Create your styled component:
@@ -48,16 +57,22 @@ const PinkButton = styled(Button)`
   color: hotpink;
 `
 
-new Vue({
-  render() {
-    return (
-      <div>
-        <Button>normal button</Button>
-        <PinkButton>pink button</PinkButton>
-      </div>
-    )
+const Component = {
+  components: {
+    Button,
+    PinkButton,
+  },
+  setup() {
+    return () => {
+      return (
+        <div>
+          <Button>normal button</Button>
+          <PinkButton>pink button</PinkButton>
+        </div>
+      )
+    }
   }
-})
+}
 ```
 
 Refer to https://emotion.sh for more docs.
@@ -67,7 +82,11 @@ Refer to https://emotion.sh for more docs.
 Using `provide/inject`:
 
 ```js
-new Vue({
+const Component = {
+  components: {
+    Button,
+    PinkButton,
+  },
   provide() {
     return {
       theme: this.theme
@@ -78,13 +97,15 @@ new Vue({
       theme: 'dark'
     }
   },
-  render() {
-    const Button = styled('button')`
-      color: ${props => (props.theme === 'dark' ? 'white' : 'black')};
-    `
-    return <Button>Hello</Button>
+  setup() {
+    return () => {
+      const Button = styled('button')`
+        color: ${props => (props.theme === 'dark' ? 'white' : 'black')};
+      `
+       return <Button>Hello</Button>
+    }
   }
-})
+}
 ```
 
 I do know that `provide/inject` is NOT recommended in generic application code, but before we find a better solution, use it as a work-around.
@@ -123,9 +144,8 @@ You can extract critical CSS like this during server-side rendering:
 ```js
 const { renderStyle } = require('@egoist/vue-emotion/server')
 
-// `cache` is the $emotionCache property on your Vue app instance
 // `html` is the rendered HTML by vue-server-renderer
-const style = renderStyle(cache, html)
+const style = renderStyle(html)
 // <style>...</style>
 ````
 

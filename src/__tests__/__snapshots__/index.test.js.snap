@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VueEmotion createGlobalStyle 1`] = `"body{background:red;}"`;
+
+exports[`VueEmotion createGlobalStyle 2`] = `
+<div>
+  <div>
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`VueEmotion styled 1`] = `".css-fe74q7{font-size:15px;}"`;
+
+exports[`VueEmotion styled 2`] = `
+<div>
+  <div>
+    <button
+      class="emotion-vue css-fe74q7"
+    >
+      test
+    </button>
+  </div>
+</div>
+`;
