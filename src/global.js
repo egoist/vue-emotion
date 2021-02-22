@@ -7,11 +7,11 @@ function insertWithoutScoping(cache, serialized) {
 }
 
 export const createGlobalStyle = (...styles) => ({
-  functional: true,
+  inheritAttrs: false,
 
-  render(_, { parent, data }) {
-    const cache = parent.$emotionCache
-    const mergedProps = { ...data.attrs, ...parent.$evergarden }
+  render({ $parent, $attrs, $props }) {
+    const cache = $parent.$emotionCache
+    const mergedProps = { ...$props, ...$attrs }
     const serialized = serializeStyles(styles, cache.registered, mergedProps)
     insertWithoutScoping(cache, serialized)
   }
