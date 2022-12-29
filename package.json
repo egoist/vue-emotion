@@ -1,5 +1,5 @@
 {
-  "name": "@egoist/vue-emotion",
+  "name": "@appbaseio/vue-emotion",
   "version": "0.5.0",
   "description": "Seamlessly use emotion (CSS-in-JS) with Vue.js",
   "publishConfig": {
@@ -21,7 +21,7 @@
     "test": "jest",
     "lint": "xo",
     "prepublishOnly": "npm run build",
-    "build": "bili src/index.js,src/server.js --format cjs,esm --minimal",
+    "build": "rollup src/index.js --file dist/index.js --format cjs && rollup src/index.js --file dist/index.esm.js --format esm && rollup src/server.js --file dist/server.js --format cjs && rollup src/server.js --file dist/server.esm.js --format esm",
     "example": "cd examples && npm run dev",
     "ssr-example": "saber ssr-example",
     "toc": "markdown-toc -i README.md"
@@ -62,7 +62,7 @@
     "@vue/babel-plugin-jsx": "^1.0.3",
     "@vue/compiler-sfc": "^3.0.5",
     "babel-jest": "^26.6.3",
-    "bili": "^5.0.5",
+    "rollup": "^3.9.0",
     "eslint-config-rem": "^4.0.0",
     "husky": "^5.0.9",
     "jest": "^26.6.3",
