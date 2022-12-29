@@ -1,6 +1,6 @@
 {
   "name": "@appbaseio/vue-emotion",
-  "version": "0.5.0",
+  "version": "0.6.0-alpha.2",
   "description": "Seamlessly use emotion (CSS-in-JS) with Vue.js",
   "publishConfig": {
     "access": "public"
@@ -62,7 +62,6 @@
     "@vue/babel-plugin-jsx": "^1.0.3",
     "@vue/compiler-sfc": "^3.0.5",
     "babel-jest": "^26.6.3",
-    "rollup": "^3.9.0",
     "eslint-config-rem": "^4.0.0",
     "husky": "^5.0.9",
     "jest": "^26.6.3",
@@ -70,6 +69,7 @@
     "jest-watch-typeahead": "^0.6.1",
     "lint-staged": "^10.5.4",
     "markdown-toc": "^1.2.0",
+    "rollup": "^3.9.0",
     "saber": "^0.11.7",
     "vue": "^3.0.5",
     "vue-jest": "^5.0.0-alpha.7",
