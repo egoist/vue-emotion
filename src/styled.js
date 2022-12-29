@@ -59,14 +59,18 @@ const createStyled = (tag, options = {}) => {
       inject: {
         theme: {
           default: undefined,
+          from: "theme_reactivesearch",
+        },
+        $emotionCache: {
+          default: undefined,
         },
       },
-
       render(renderContext) {
-        const { theme } = renderContext;
+        const { theme, $emotionCache } = renderContext;
         const { $attrs, $options, $slots, $props, $parent } = renderContext;
 
-        const cache = $parent.$emotionCache;
+        const cache =
+          this.$emotionCache || $emotionCache || $options.inject.$emotionCache;
         const { as, ...restAttrs } = $attrs || {};
 
         let className = "";
