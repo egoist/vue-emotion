@@ -1,7 +1,6 @@
-import createEmotionServer from 'create-emotion-server'
+import { extractCritical } from "@emotion/server";
 
-export const renderStyle = (cache, html) => {
-  const emotionServer = createEmotionServer(cache)
-  const { css, ids } = emotionServer.extractCritical(html)
-  return `<style data-emotion-${cache.key}="${ids.join(' ')}">${css}</style>`
-}
+export const renderStyle = (html) => {
+  const { css, ids } = extractCritical(html);
+  return `<style data-emotion-${cache.key}="${ids.join(" ")}">${css}</style>`;
+};

@@ -1,3 +1,4 @@
+import { h } from 'vue'
 import { styled } from '@egoist/vue-emotion'
 
 const Button = styled('button')`
@@ -7,7 +8,7 @@ const Button = styled('button')`
 `
 
 export default {
-  render(h) {
+  render() {
     return h('div', {}, [
       h(Button, {}, ['Hello'])
     ])

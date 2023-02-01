@@ -1,0 +1,22 @@
+{
+  "name": "examples",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "vue": "^3.0.5",
+    "vue-router": "^4.0.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.1.4",
+    "@vitejs/plugin-vue-jsx": "^1.1.0",
+    "@vue/compiler-sfc": "^3.0.5",
+    "@vue/server-renderer": "^3.0.5",
+    "compression": "^1.7.4",
+    "express": "^4.17.1",
+    "serve-static": "^1.14.1",
+    "vite": "^2.0.1"
+  }
+}
