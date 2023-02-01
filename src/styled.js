@@ -61,7 +61,9 @@ const createStyled = (tag, options = {}) => {
           from: 'theme_reactivesearch',
           default: undefined
         },
-        $emotionCache: null
+        $emotionCache: {
+          default: null,
+        }
       },
 
       render(renderContext) {

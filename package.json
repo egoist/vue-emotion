@@ -1,6 +1,6 @@
 {
   "name": "@appbaseio/vue-emotion",
-  "version": "0.6.0-alpha.4",
+  "version": "0.6.0-alpha.6",
   "description": "Seamlessly use emotion (CSS-in-JS) with Vue.js",
   "publishConfig": {
     "access": "public"
