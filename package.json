@@ -21,8 +21,8 @@
     "test": "npm run lint && echo 'no tests!'",
     "lint": "xo",
     "prepublishOnly": "npm run build",
-    "build": "bili src/index.js,src/server.js --format cjs,esm --minimal",
-    "example": "poi -s",
+    "build": "rollup src/index.js --file dist/index.js --format cjs && rollup src/index.js --file dist/index.esm.js --format esm && rollup src/server.js --file dist/server.js --format cjs && rollup src/server.js --file dist/server.esm.js --format esm",
+    "example": "cd examples && npm run dev",
     "ssr-example": "saber ssr-example",
     "build:example": "poi --prod",
     "toc": "markdown-toc -i README.md"
@@ -43,25 +43,39 @@
       "camelcase": "off"
     }
   },
+  "peerDependencies": {
+    "vue": ">=3"
+  },
   "dependencies": {
-    "@emotion/cache": "^10.0.19",
-    "@emotion/serialize": "^0.11.11",
-    "@emotion/utils": "^0.11.2",
-    "clsx": "^1.0.4",
-    "create-emotion-server": "^10.0.14"
+    "@emotion/cache": "^11.1.3",
+    "@emotion/serialize": "^1.0.0",
+    "@emotion/server": "^11.0.0",
+    "@emotion/utils": "^1.0.0"
   },
   "devDependencies": {
-    "babel-plugin-emotion": "^10.0.19",
-    "bili": "^4.8.1",
+    "@babel/plugin-proposal-class-properties": "^7.12.13",
+    "@babel/preset-env": "^7.12.17",
+    "@babel/preset-typescript": "^7.12.17",
+    "@emotion/babel-plugin": "^11.2.0",
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/vue": "^6.3.4",
+    "@types/testing-library__jest-dom": "^5.9.5",
+    "@vue/babel-plugin-jsx": "^1.0.3",
+    "@vue/compiler-sfc": "^3.0.5",
+    "babel-jest": "^26.6.3",
     "eslint-config-rem": "^4.0.0",
-    "husky": "^3.0.7",
-    "lint-staged": "^9.4.0",
+    "husky": "^5.0.9",
+    "jest": "^26.6.3",
+    "jest-serializer-vue": "^2.0.2",
+    "jest-watch-typeahead": "^0.6.1",
+    "lint-staged": "^10.5.4",
     "markdown-toc": "^1.2.0",
-    "poi": "^12.7.3",
-    "saber": "^0.10.4",
-    "vue": "^2.6.10",
-    "vue-template-compiler": "^2.6.10",
-    "xo": "^0.25.3"
+    "rollup": "^3.9.0",
+    "saber": "^0.11.7",
+    "vue": "^3.3.4",
+    "vue-jest": "^5.0.0-alpha.7",
+    "vue-loader": "^16.1.2",
+    "xo": "^0.38.1"
   },
   "husky": {
     "hooks": {

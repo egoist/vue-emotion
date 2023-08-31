@@ -1,4 +1,4 @@
-import clsx from 'clsx'
+import { h } from 'vue'
 import { getRegisteredStyles, insertStyles } from '@emotion/utils'
 import { serializeStyles } from '@emotion/serialize'
 
@@ -55,36 +55,36 @@ const createStyled = (tag, options = {}) => {
     }
 
     const Styled = {
-      functional: true,
-
+      inheritAttrs: false,
       inject: {
         theme: {
           default: undefined
+        },
+        $emotionCache: {
+          default: null,
         }
       },
 
-      render(h, { data, children, parent, injections }) {
-        const cache = parent.$emotionCache
-        const { as, value, ...restAttrs } = data.attrs || {}
+      render(renderContext) {
+        const { theme } = renderContext
+        const { $attrs, $options, $slots, $props, $parent } = renderContext
 
-        let className = data.staticClass ? `${data.staticClass} ` : ''
+        const cache = this.$emotionCache
+        const { as, ...restAttrs } = $attrs || {}
+
+        let className = ''
         const finalTag = as || baseTag
         const classInterpolations = []
         const mergedProps = {
-          ...data.attrs,
-          theme: injections.theme,
-          ...parent.$evergarden
-        }
-        const domProps = {
-          value,
-          ...data.domProps
+          ...$attrs,
+          theme: theme || this.theme || {},
         }
 
-        if (data.class) {
+        if ($attrs.class) {
           className += getRegisteredStyles(
             cache.registered,
             classInterpolations,
-            clsx(data.class)
+            $attrs.class
           )
         }
 
@@ -105,16 +105,16 @@ const createStyled = (tag, options = {}) => {
           className += ` ${targetClassName}`
         }
 
+        const renderProps = {
+          ...$props,
+          ...(options.getAttrs ? options.getAttrs(restAttrs) : restAttrs),
+          class: className,
+        }
+
         return h(
           finalTag,
-          {
-            ...data,
-            attrs: options.getAttrs ? options.getAttrs(restAttrs) : restAttrs,
-            staticClass: undefined,
-            class: className,
-            domProps
-          },
-          children
+          renderProps,
+          $slots
         )
       }
     }
